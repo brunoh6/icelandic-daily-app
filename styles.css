@@ -494,7 +494,7 @@ details p {
   line-height: 1.55;
 }
 
-details ul {
+details[open] ul {
   display: grid;
   gap: 6px;
   margin: 10px 0 0;
@@ -535,6 +535,9 @@ details ul {
   position: sticky;
   top: 12px;
   z-index: 5;
+  display: block;
+  width: 100%;
+  text-align: left;
   margin-bottom: 12px;
   background: #101a24;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
@@ -613,6 +616,11 @@ details ul {
   font-size: 0.92rem;
 }
 
+.grammar-table th:first-child,
+.grammar-table td:first-child {
+  white-space: nowrap;
+}
+
 .grammar-table th,
 .grammar-table td {
   border: 1px solid var(--line);
@@ -635,27 +643,39 @@ details ul {
     grid-template-columns: 1fr;
   }
 
+  /* Clears the fixed tab bar so it never overlaps this sticky button. */
+  #grammarBack,
+  #novelBack {
+    top: 78px;
+  }
+
   .sidebar {
     position: static;
     height: auto;
-    padding: 16px;
+    padding: 78px 16px 16px;
     gap: 16px;
   }
 
-  /* Tabs move to a thumb-reachable bar fixed to the bottom of the screen,
-     since this app is meant to be used one-handed while on the go. */
+  /* Tabs are pinned to the top of the viewport at all times, so they're
+     reachable without scrolling back up. Deliberately not the bottom:
+     on iPhone that's where the swipe-up-to-home and app-switcher
+     gestures live, which makes a bottom bar feel cramped and
+     error-prone to tap near the edge. `fixed` (not `sticky`) is used
+     because `.tabs` sits inside the short `.sidebar` block; `sticky`
+     would only stay pinned while that short block is still on screen,
+     then scroll away with it once the rest of the page scrolls past. */
   .tabs {
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     z-index: 30;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 2px;
-    padding: 6px max(6px, env(safe-area-inset-left)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-right));
+    padding: 8px 6px;
     background: #0b141d;
-    border-top: 1px solid var(--line);
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
 
   .tab {
@@ -664,13 +684,13 @@ details ul {
     justify-content: center;
     text-align: center;
     padding: 0 2px;
-    min-height: 52px;
+    min-height: 48px;
     font-size: 0.72rem;
     line-height: 1.15;
   }
 
   .main {
-    padding: 16px 16px calc(76px + env(safe-area-inset-bottom));
+    padding: 16px;
   }
 
   .top-content {
@@ -687,6 +707,15 @@ details ul {
 }
 
 @media (max-width: 520px) {
+  #grammarBack,
+  #novelBack {
+    top: 118px;
+  }
+
+  .sidebar {
+    padding-top: 118px;
+  }
+
   .tabs {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -694,10 +723,6 @@ details ul {
   .tab {
     min-height: 44px;
     font-size: 0.76rem;
-  }
-
-  .main {
-    padding-bottom: calc(128px + env(safe-area-inset-bottom));
   }
 
   .top-band,

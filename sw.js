@@ -1,4 +1,4 @@
-const CACHE_NAME = "icelandic-daily-v7";
+const CACHE_NAME = "icelandic-daily-v8";
 const ASSETS = [
   "./",
   "./index.html",
