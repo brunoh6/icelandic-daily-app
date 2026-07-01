@@ -131,6 +131,8 @@ button {
 
 .main {
   min-width: 0;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 24px;
 }
 
@@ -528,6 +530,16 @@ details ul {
   display: block;
 }
 
+#grammarBack,
+#novelBack {
+  position: sticky;
+  top: 12px;
+  z-index: 5;
+  margin-bottom: 12px;
+  background: #101a24;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
 .mode-toggle {
   display: inline-flex;
   gap: 6px;
@@ -627,19 +639,38 @@ details ul {
     position: static;
     height: auto;
     padding: 16px;
+    gap: 16px;
   }
 
+  /* Tabs move to a thumb-reachable bar fixed to the bottom of the screen,
+     since this app is meant to be used one-handed while on the go. */
   .tabs {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2px;
+    padding: 6px max(6px, env(safe-area-inset-left)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-right));
+    background: #0b141d;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
   }
 
   .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 0 6px;
+    padding: 0 2px;
+    min-height: 52px;
+    font-size: 0.72rem;
+    line-height: 1.15;
   }
 
   .main {
-    padding: 16px;
+    padding: 16px 16px calc(76px + env(safe-area-inset-bottom));
   }
 
   .top-content {
@@ -658,6 +689,15 @@ details ul {
 @media (max-width: 520px) {
   .tabs {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tab {
+    min-height: 44px;
+    font-size: 0.76rem;
+  }
+
+  .main {
+    padding-bottom: calc(128px + env(safe-area-inset-bottom));
   }
 
   .top-band,

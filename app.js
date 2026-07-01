@@ -1975,6 +1975,7 @@ function openGrammarTopic(id) {
   $("#grammarDetailWrap").classList.add("is-open");
   $(".grammar-list-wrap").classList.add("is-hidden");
   renderGrammarDetail();
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function closeGrammarDetail() {
@@ -1982,6 +1983,7 @@ function closeGrammarDetail() {
   $("#grammarDetailWrap").classList.remove("is-open");
   $(".grammar-list-wrap").classList.remove("is-hidden");
   renderGrammarList();
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function renderGrammarDetail() {
@@ -2299,12 +2301,14 @@ function openNovel(id) {
   $("#novelDetailWrap").classList.add("is-open");
   $(".novel-list-wrap").classList.add("is-hidden");
   renderNovelDetail();
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function closeNovelDetail() {
   currentNovelId = null;
   $("#novelDetailWrap").classList.remove("is-open");
   $(".novel-list-wrap").classList.remove("is-hidden");
+  window.scrollTo({ top: 0, behavior: "instant" });
   renderNovelList();
 }
 
@@ -2342,6 +2346,7 @@ function renderChapterTabs() {
         saveNovelProgress();
         renderChapterTabs();
         renderNovelChapter();
+        $("#novelChapterTitle").scrollIntoView({ behavior: "instant", block: "start" });
       });
     });
 }
@@ -2442,6 +2447,7 @@ function navigateChapter(delta) {
   saveNovelProgress();
   renderChapterTabs();
   renderNovelChapter();
+  $("#novelChapterTitle").scrollIntoView({ behavior: "instant", block: "start" });
 }
 
 function renderReview() {
@@ -2487,6 +2493,7 @@ function showView(view) {
   $$(".tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.view === view));
   $$(".view").forEach((section) => section.classList.remove("is-visible"));
   $(`#${view}View`).classList.add("is-visible");
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function drawIcelandCanvas() {
