@@ -686,12 +686,12 @@ const grammarTopics = [
     id: "cases-overview",
     level: "A1",
     category: "Cases",
-    title: "The Four Cases at a Glance",
-    summary: "What nominative, accusative, dative, and genitive each do in a sentence.",
+    title: "What Are Cases? The Nominative",
+    summary: "The case system at a glance, and how the nominative marks the subject.",
     theory: [
       "Icelandic has four grammatical cases: nominative, accusative, dative, and genitive. The case of a noun shows the role it plays in the sentence, not just its position in the word order.",
-      "Nominative marks the subject, the one doing the action. Accusative usually marks a direct object. Dative often marks an indirect object or follows certain prepositions and verbs. Genitive shows possession, similar to English 's or 'of'.",
-      "Verbs and prepositions each expect a specific case from the noun that follows them, so it helps to learn short phrases as whole units instead of translating word by word."
+      "The nominative marks the subject, the one doing the action, and is also the citation form: the form a noun is listed under in a dictionary.",
+      "The other three cases each get their own topic in this section (Accusative, Dative, and Genitive). Verbs and prepositions each expect a specific case from the noun that follows them, so it helps to learn short phrases as whole units instead of translating word by word."
     ],
     tables: [
       {
@@ -706,13 +706,202 @@ const grammarTopics = [
       }
     ],
     examples: [
-      { is: "Ég sé hótelið.", en: "I see the hotel. (accusative)" },
-      { is: "Hann talar við konuna.", en: "He talks with the woman. (accusative after við)" }
+      { is: "Hundurinn er svangur.", en: "The dog is hungry. (nominative subject)" },
+      { is: "Hótelið er stórt.", en: "The hotel is big. (nominative subject)" }
     ],
     exercises: [
       { type: "choice", prompt: "Which case usually marks the subject of a sentence?", options: ["nominative", "accusative", "dative", "genitive"], answer: "nominative" },
       { type: "choice", prompt: "Which case typically shows possession?", options: ["genitive", "nominative", "accusative", "dative"], answer: "genitive" },
-      { type: "choice", prompt: "In 'Ég sé hundinn', what role does hundinn play?", options: ["direct object", "subject", "possessor", "indirect object"], answer: "direct object" }
+      { type: "choice", prompt: "Which case doubles as a noun's dictionary form?", options: ["nominative", "accusative", "dative", "genitive"], answer: "nominative" }
+    ]
+  },
+  {
+    id: "noun-classes",
+    level: "A1",
+    category: "Nouns",
+    title: "Weak and Strong Nouns",
+    summary: "Two declension patterns, and a shortcut for how each one behaves.",
+    theory: [
+      "Icelandic nouns fall into two declension types: strong and weak. The split is not about meaning, but about which endings a noun takes as its case changes.",
+      "Weak nouns are the more predictable group. Weak masculine nouns end in -i and take -a in every oblique case (accusative, dative, and genitive). Weak feminine nouns end in -a and take -u in every oblique case. Weak neuter nouns end in -a and do not change at all across the singular.",
+      "Strong nouns show more variety and are worth learning noun by noun, but one shortcut applies across every gender: a neuter noun's accusative always matches its nominative, in both singular and plural."
+    ],
+    tables: [
+      {
+        title: "Singular case endings by noun type (example words)",
+        headers: ["Type", "Nominative", "Accusative", "Dative", "Genitive"],
+        rows: [
+          ["Strong masculine (hestur, horse)", "hestur", "hest", "hesti", "hests"],
+          ["Weak masculine (tími, time)", "tími", "tíma", "tíma", "tíma"],
+          ["Strong feminine (borg, city)", "borg", "borg", "borg", "borgar"],
+          ["Weak feminine (saga, story)", "saga", "sögu", "sögu", "sögu"],
+          ["Strong neuter (barn, child)", "barn", "barn", "barni", "barns"],
+          ["Weak neuter (auga, eye)", "auga", "auga", "auga", "auga"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Þetta er falleg borg.", en: "This is a beautiful city. (strong feminine)" },
+      { is: "Sagan er löng.", en: "The story is long. (weak feminine)" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which single ending covers accusative, dative, AND genitive for tími (weak masculine)?", options: ["-a", "-i", "-ar", "-ans"], answer: "-a" },
+      { type: "choice", prompt: "Which noun type never changes at all across the singular cases?", options: ["weak neuter", "strong masculine", "weak feminine", "strong feminine"], answer: "weak neuter" },
+      { type: "type", prompt: "Give the genitive singular of borg (city, strong feminine).", answer: "borgar" }
+    ]
+  },
+  {
+    id: "accusative-case",
+    level: "A1",
+    category: "Cases",
+    title: "The Accusative Case",
+    summary: "Marking the direct object, in nouns, pronouns, and adjectives.",
+    theory: [
+      "The accusative usually marks the direct object: the person or thing directly affected by the verb's action.",
+      "For most nouns, the accusative singular looks identical to the nominative. The main exception is strong masculine nouns, which typically drop their nominative ending (hestur becomes hest).",
+      "Personal pronouns change more noticeably in the accusative: ég becomes mig, þú becomes þig, and hún becomes hana. Adjectives describing an accusative noun shift too, most visibly in the masculine (góður becomes góðan)."
+    ],
+    tables: [
+      {
+        title: "Accusative singular by noun type",
+        headers: ["Type", "Nominative", "Accusative"],
+        rows: [
+          ["Strong masculine", "hestur", "hest"],
+          ["Weak masculine", "tími", "tíma"],
+          ["Strong feminine", "borg", "borg"],
+          ["Weak feminine", "saga", "sögu"],
+          ["Strong neuter", "barn", "barn"],
+          ["Weak neuter", "auga", "auga"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Ég sé hestinn.", en: "I see the horse. (accusative, definite)" },
+      { is: "Hann elskar hana.", en: "He loves her. (accusative pronoun)" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What is the accusative of hestur (horse)?", options: ["hest", "hestur", "hesti", "hests"], answer: "hest" },
+      { type: "choice", prompt: "Which pronoun is the accusative of hún (she)?", options: ["hana", "hún", "hennar", "henni"], answer: "hana" },
+      { type: "type", prompt: "Translate: I see the horse. Use the definite accusative of hestur.", answer: "Ég sé hestinn" }
+    ]
+  },
+  {
+    id: "demonstratives",
+    level: "A1",
+    category: "Pronouns",
+    title: "Demonstrative Pronouns: þessi and þetta",
+    summary: "One default pointing word, and one that agrees with the noun.",
+    theory: [
+      "Icelandic has two ways to point at something: þetta, used broadly without needing to match the noun's gender, and þessi, which agrees with the noun it modifies.",
+      "In simple identification sentences, þetta is the default choice regardless of gender: Þetta er bíll (This is a car), Þetta er kona (This is a woman), Þetta er hús (This is a house).",
+      "When the word modifies a noun directly, it agrees in gender: þessi bíll (masculine), þessi kona (feminine), but þetta hús (neuter uses þetta even when modifying a noun)."
+    ],
+    tables: [
+      {
+        title: "þessi / þetta by gender, nominative singular",
+        headers: ["Gender", "Form", "Example"],
+        rows: [
+          ["Masculine", "þessi", "þessi bíll (this car)"],
+          ["Feminine", "þessi", "þessi kona (this woman)"],
+          ["Neuter", "þetta", "þetta hús (this house)"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Þetta er kaffi.", en: "This is coffee. (general identification)" },
+      { is: "Þessi kona er kennari.", en: "This woman is a teacher. (agreement)" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which form agrees with a neuter noun like hús (house)?", options: ["þetta", "þessi", "þessar", "þessum"], answer: "þetta" },
+      { type: "choice", prompt: "In a general identification sentence like 'This is a car,' which word is the default choice?", options: ["þetta", "þessi", "þessar", "það"], answer: "þetta" },
+      { type: "type", prompt: "Translate: This woman is a teacher.", answer: "Þessi kona er kennari" }
+    ]
+  },
+  {
+    id: "imperative",
+    level: "A1",
+    category: "Verbs",
+    title: "Imperative Mood",
+    summary: "Giving commands, and how to say 'Let's...'.",
+    theory: [
+      "The imperative gives commands or instructions. For most verbs, it is built from the þú-form of the present tense by dropping the ending and attaching -ðu (or -du after certain consonants), folding the pronoun into the verb.",
+      "Tala (to speak) gives Talaðu! (Speak!); Fara (to go) gives Farðu! (Go!); Koma (to come) gives Komdu! (Come!). These forms are extremely common in everyday spoken Icelandic.",
+      "To suggest a joint action ('Let's...'), use Við skulum plus the infinitive: Við skulum fara (Let's go)."
+    ],
+    examples: [
+      { is: "Komdu hingað!", en: "Come here!" },
+      { is: "Við skulum byrja.", en: "Let's begin." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What does Talaðu! mean?", options: ["Speak!", "I speak.", "You speak?", "Speaking"], answer: "Speak!" },
+      { type: "choice", prompt: "How do you say 'Let's go'?", options: ["Við skulum fara", "Ég fer", "Þú ferð", "Hann fer"], answer: "Við skulum fara" },
+      { type: "type", prompt: "Give the imperative (command) form of koma (to come).", answer: "Komdu", hint: "Attach -du to the verb, folding in the pronoun." }
+    ]
+  },
+  {
+    id: "dative-case",
+    level: "A2",
+    category: "Cases",
+    title: "The Dative Case",
+    summary: "Marking the indirect object, and the case some prepositions demand.",
+    theory: [
+      "The dative often marks an indirect object, the receiver of something, and is required after several common prepositions, including með (with) and frá (from).",
+      "Weak nouns keep the same oblique ending they use in the accusative and genitive, so once you know a weak noun's accusative you largely already know its dative. Strong nouns are more individual, but strong neuter nouns typically add -i.",
+      "Personal pronouns shift again in the dative: mér (to/for me), þér (to/for you), henni (to/for her)."
+    ],
+    tables: [
+      {
+        title: "Dative singular by noun type",
+        headers: ["Type", "Nominative", "Dative"],
+        rows: [
+          ["Strong masculine", "hestur", "hesti"],
+          ["Weak masculine", "tími", "tíma"],
+          ["Strong feminine", "borg", "borg"],
+          ["Weak feminine", "saga", "sögu"],
+          ["Strong neuter", "barn", "barni"],
+          ["Weak neuter", "auga", "auga"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Ég gef henni bók.", en: "I give her a book. (dative pronoun)" },
+      { is: "Hann er með hestinum.", en: "He is with the horse. (með + dative)" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What is the dative of barn (child, strong neuter)?", options: ["barni", "barn", "barns", "börnum"], answer: "barni" },
+      { type: "choice", prompt: "Which pronoun means 'to/for her'?", options: ["henni", "hana", "hún", "hennar"], answer: "henni" },
+      { type: "type", prompt: "Translate: I give her a book.", answer: "Ég gef henni bók" }
+    ]
+  },
+  {
+    id: "reflexives",
+    level: "A2",
+    category: "Pronouns",
+    title: "Reflexive Pronouns",
+    summary: "sig, sér, sín: acting on oneself, only marked in the third person.",
+    theory: [
+      "Icelandic marks reflexivity, doing something to or for oneself, only in the third person, with a special set of forms: sig (accusative), sér (dative), and sín (genitive). First and second person simply reuse the ordinary object pronouns, since 'I bought myself coffee' is not ambiguous about who 'myself' is.",
+      "The contrast matters because Icelandic distinguishes acting on oneself from acting on someone else, using different pronouns for each: Hann keypti sér kaffi (He bought himself coffee) versus Hann keypti honum kaffi (He bought him, someone else, coffee)."
+    ],
+    tables: [
+      {
+        title: "Third-person reflexive pronouns",
+        headers: ["Case", "Form", "Meaning"],
+        rows: [
+          ["Accusative", "sig", "himself / herself / itself / themselves"],
+          ["Dative", "sér", "to / for himself, herself, itself, themselves"],
+          ["Genitive", "sín", "his / her / its own"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Hún keypti sér nýjan bíl.", en: "She bought herself a new car." },
+      { is: "Þau tala um sig.", en: "They talk about themselves." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which pronoun means 'to/for himself' in the dative?", options: ["sér", "sig", "sín", "honum"], answer: "sér" },
+      { type: "choice", prompt: "In 'Hann keypti honum kaffi,' who receives the coffee?", options: ["someone else, not the subject", "the subject himself", "no one", "the speaker"], answer: "someone else, not the subject" },
+      { type: "type", prompt: "Complete: Hún keypti ___ nýjan bíl. (dative reflexive: 'for herself')", answer: "sér" }
     ]
   },
   {
@@ -804,8 +993,9 @@ const grammarTopics = [
     level: "A2",
     category: "Verbs",
     title: "Past Tense Verbs",
-    summary: "Weak verbs add a dental suffix; strong verbs change their stem vowel.",
+    summary: "Weak verbs add a dental suffix; strong verbs change their stem vowel. Goes beyond the beginner course.",
     theory: [
+      "This topic goes past what a typical beginner course covers, since most keep the past tense for a second-level book. It is included here as a bonus for anyone who wants to push a little further.",
       "Weak verbs form the past tense with a dental suffix, usually -aði, -di, or -ti added to the stem. Tala (to speak) becomes talaði in the past.",
       "Strong verbs change their stem vowel instead, similar to English sing/sang/sung. Fara (to go) becomes fór in the past, and koma (to come) becomes kom.",
       "Strong verb patterns are not fully predictable, so it is efficient to memorize the past tense of common strong verbs individually rather than deriving it from a rule."
@@ -953,12 +1143,81 @@ const grammarTopics = [
     ]
   },
   {
+    id: "genitive-case",
+    level: "A2",
+    category: "Cases",
+    title: "The Genitive Case",
+    summary: "Possession, and the preposition til that always demands it.",
+    theory: [
+      "The genitive expresses possession, similar to English 's or 'of'. In everyday spoken Icelandic it is increasingly common to hear af plus dative instead, but the genitive remains standard in writing and appears in fixed phrases.",
+      "Endings vary by noun type: strong masculine and neuter nouns typically add -s (hestur to hests, barn to barns), strong feminine nouns add -ar (borg to borgar), and weak nouns of every gender add -a or -u, matching their other oblique cases.",
+      "The preposition til (to, toward) always takes the genitive: Ég fer til Íslands (I am going to Iceland)."
+    ],
+    tables: [
+      {
+        title: "Genitive singular by noun type",
+        headers: ["Type", "Nominative", "Genitive"],
+        rows: [
+          ["Strong masculine", "hestur", "hests"],
+          ["Weak masculine", "tími", "tíma"],
+          ["Strong feminine", "borg", "borgar"],
+          ["Weak feminine", "saga", "sögu"],
+          ["Strong neuter", "barn", "barns"],
+          ["Weak neuter", "auga", "auga"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Nafn hestsins er Blesi.", en: "The horse's name is Blesi." },
+      { is: "Ég fer til Íslands.", en: "I am going to Iceland." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What is the genitive of hestur (horse)?", options: ["hests", "hesti", "hest", "hestar"], answer: "hests" },
+      { type: "choice", prompt: "Which case does the preposition til always take?", options: ["genitive", "accusative", "dative", "nominative"], answer: "genitive" },
+      { type: "type", prompt: "Give the genitive of borg (city, strong feminine).", answer: "borgar" }
+    ]
+  },
+  {
+    id: "modals-infinitives",
+    level: "A2",
+    category: "Verbs",
+    title: "Modal Verbs and Verb+Infinitive Patterns",
+    summary: "Ætla að, vera búinn að, eiga að, and munu: intention, completion, obligation, future.",
+    theory: [
+      "Icelandic uses a handful of high-frequency verb-plus-infinitive patterns to express intention, near-future action, obligation, and completed action, similar to English 'going to,' 'about to,' and 'supposed to.'",
+      "Ætla að + infinitive expresses intention or a plan: Ég ætla að læra (I am going to study). Vera búinn að + infinitive expresses that something is already finished: Ég er búinn að læra (I have already studied).",
+      "Eiga að + infinitive expresses obligation or expectation: Þú átt að mæta klukkan átta (You are supposed to arrive at eight). The modal verb munu (will) works like its English counterpart for talking about the future: Ég mun koma (I will come)."
+    ],
+    tables: [
+      {
+        title: "Common verb + infinitive patterns",
+        headers: ["Pattern", "Meaning", "Example"],
+        rows: [
+          ["ætla að + infinitive", "intend to / going to", "Ég ætla að fara."],
+          ["vera búinn að + infinitive", "have already done", "Ég er búinn að borða."],
+          ["eiga að + infinitive", "supposed to / should", "Þú átt að hringja."],
+          ["munu + infinitive", "will (future)", "Ég mun koma."]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Hún ætlar að ferðast til Íslands.", en: "She is going to travel to Iceland." },
+      { is: "Við erum búin að klára verkefnið.", en: "We have already finished the assignment." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What does 'Ég er búinn að læra' mean?", options: ["I have already studied", "I am going to study", "I should study", "I will study"], answer: "I have already studied" },
+      { type: "choice", prompt: "Which pattern expresses obligation, like 'supposed to'?", options: ["eiga að + infinitive", "ætla að + infinitive", "vera búinn að + infinitive", "munu + infinitive"], answer: "eiga að + infinitive" },
+      { type: "type", prompt: "Translate: I am going to go. Use ætla.", answer: "Ég ætla að fara" }
+    ]
+  },
+  {
     id: "subjunctive",
     level: "B1",
     category: "Verbs",
     title: "Intro to the Subjunctive",
-    summary: "Recognizing sé and friends in reported speech, wishes, and doubt.",
+    summary: "Recognizing sé and friends in reported speech, wishes, and doubt. Goes beyond the beginner course.",
     theory: [
+      "This topic also goes past what a typical beginner course covers; most save the subjunctive for a second-level book. It is included here as a bonus for anyone who wants to push a little further.",
       "The subjunctive (viðtengingarháttur) is used for indirect speech, wishes, doubt, and some conditional or purpose clauses. It is a shift in mood, not tense.",
       "A common trigger is reported speech after verbs like segja (say) or halda (think): Hann segir að hún sé þreytt (He says that she is tired) uses sé, the subjunctive of vera, instead of the indicative er.",
       "At this stage, focus on recognizing the subjunctive forms of vera rather than producing every verb's subjunctive freely."
@@ -1286,12 +1545,14 @@ function renderGrammarDetail() {
     .map(
       (table) => `
         <h3>${table.title}</h3>
-        <table class="grammar-table">
-          <thead><tr>${table.headers.map((header) => `<th>${header}</th>`).join("")}</tr></thead>
-          <tbody>${table.rows
-            .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
-            .join("")}</tbody>
-        </table>
+        <div class="table-scroll">
+          <table class="grammar-table">
+            <thead><tr>${table.headers.map((header) => `<th>${header}</th>`).join("")}</tr></thead>
+            <tbody>${table.rows
+              .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
+              .join("")}</tbody>
+          </table>
+        </div>
       `
     )
     .join("");
