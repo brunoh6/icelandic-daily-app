@@ -646,6 +646,186 @@ const readings = [
       { prompt: "What contrast does the text make about Reykjavík?", options: ["not very large, but important", "very hot, but empty", "old only, not modern"], answer: "not very large, but important" },
       { prompt: "What can be seen in the city center?", options: ["old houses, new buildings, cafes, and the harbor", "only mountains", "only a university"], answer: "old houses, new buildings, cafes, and the harbor" }
     ]
+  },
+  {
+    id: "a0-airport",
+    level: "A0",
+    topic: "travel",
+    title: "Á flugvellinum",
+    minutes: 3,
+    text: [
+      "Flugvélin lendir klukkan tíu.",
+      "Ég tek töskuna mína.",
+      "Rútan bíður fyrir utan.",
+      "Ég fer til Reykjavíkur.",
+      "Ferðin er stutt."
+    ],
+    translation: "The plane lands at ten o'clock. I take my suitcase. The coach waits outside. I go to Reykjavík. The trip is short.",
+    hints: ["lendir: lands", "töskuna: the suitcase", "bíður: waits"],
+    checks: [
+      { prompt: "What time does the plane land?", options: ["ten o'clock", "two o'clock", "midnight"], answer: "ten o'clock" },
+      { prompt: "Where does the coach wait?", options: ["outside", "at the hotel", "in Akureyri"], answer: "outside" }
+    ]
+  },
+  {
+    id: "a0-gift",
+    level: "A0",
+    topic: "shopping",
+    title: "Gjöf til vinar",
+    minutes: 3,
+    text: [
+      "Á morgun á vinur minn afmæli.",
+      "Ég fer í búð og skoða bækur.",
+      "Ég vel litla, fallega bók.",
+      "Búðin pakkar bókinni inn.",
+      "Vinur minn verður glaður."
+    ],
+    translation: "Tomorrow my friend has a birthday. I go to a shop and look at books. I choose a small, beautiful book. The shop wraps the book. My friend will be happy.",
+    hints: ["afmæli: birthday", "vel: I choose", "pakkar inn: wraps up"],
+    checks: [
+      { prompt: "What does the speaker choose?", options: ["a small, beautiful book", "a shirt", "flowers"], answer: "a small, beautiful book" },
+      { prompt: "What does the shop do with the book?", options: ["wraps it", "reads it", "sells it back"], answer: "wraps it" }
+    ]
+  },
+  {
+    id: "a1-tourists",
+    level: "A1",
+    topic: "travel",
+    title: "Ferðamenn í Reykjavík",
+    minutes: 5,
+    text: [
+      "Margir ferðamenn koma til Reykjavíkur á sumrin.",
+      "Þeir ganga um miðbæinn og taka myndir.",
+      "Sumir fara í sund, aðrir fara í hvalaskoðun.",
+      "Á kvöldin borða þeir á litlum veitingastöðum.",
+      "Flestir segja að Reykjavík sé lítil en skemmtileg borg."
+    ],
+    translation: "Many tourists come to Reykjavík in the summer. They walk around downtown and take pictures. Some go swimming, others go whale watching. In the evenings they eat at small restaurants. Most say that Reykjavík is a small but fun city.",
+    hints: ["ferðamenn: tourists", "hvalaskoðun: whale watching", "flestir: most (people)"],
+    checks: [
+      { prompt: "What do some tourists do besides swimming?", options: ["go whale watching", "go skiing", "go fishing alone"], answer: "go whale watching" },
+      { prompt: "What do most tourists say about Reykjavík?", options: ["small but fun", "too big", "too cold to enjoy"], answer: "small but fun" }
+    ]
+  },
+  {
+    id: "a1-birthday",
+    level: "A1",
+    topic: "shopping",
+    title: "Að kaupa afmælisgjöf",
+    minutes: 5,
+    text: [
+      "Í dag ætla ég að kaupa gjöf handa systur minni.",
+      "Hún á afmæli á föstudaginn og verður tuttugu og fimm ára.",
+      "Ég fer í nokkrar búðir en finn ekkert sem mér líkar.",
+      "Loksins sé ég fallegan trefil í litlum búðum í miðbænum.",
+      "Ég held að hún verði mjög ánægð með trefilinn."
+    ],
+    translation: "Today I am going to buy a gift for my sister. She has a birthday on Friday and will turn twenty-five. I go to several shops but find nothing I like. Finally I see a beautiful scarf in a small shop downtown. I think she will be very pleased with the scarf.",
+    hints: ["handa: for (someone)", "trefil: scarf", "held að: I think that"],
+    checks: [
+      { prompt: "How old is the sister turning?", options: ["twenty-five", "thirty", "eighteen"], answer: "twenty-five" },
+      { prompt: "What does the speaker finally buy?", options: ["a scarf", "a book", "shoes"], answer: "a scarf" }
+    ]
+  },
+  {
+    id: "a2-interview",
+    level: "A2",
+    topic: "work",
+    title: "Í atvinnuviðtali",
+    minutes: 8,
+    text: [
+      "Anna mætir í atvinnuviðtal hjá litlu fyrirtæki í miðbænum.",
+      "Hún er svolítið stressuð en reynir að anda rólega.",
+      "Stjórnandinn spyr hana um fyrri reynslu og styrkleika.",
+      "Anna segir að hún hafi unnið á kaffihúsi í þrjú ár.",
+      "Í lok viðtalsins þakkar hún fyrir tímann og fer brosandi út."
+    ],
+    translation: "Anna attends a job interview at a small company downtown. She is a little stressed but tries to breathe calmly. The manager asks her about previous experience and strengths. Anna says that she has worked at a café for three years. At the end of the interview she thanks them for their time and leaves smiling.",
+    hints: ["atvinnuviðtal: job interview", "styrkleika: strengths", "anda rólega: to breathe calmly"],
+    checks: [
+      { prompt: "How does Anna feel before the interview?", options: ["a little stressed", "very confident", "angry"], answer: "a little stressed" },
+      { prompt: "Where has Anna worked for three years?", options: ["at a café", "at a hospital", "at a bank"], answer: "at a café" }
+    ]
+  },
+  {
+    id: "a2-camping",
+    level: "A2",
+    topic: "nature",
+    title: "Að fara í útilegu",
+    minutes: 8,
+    text: [
+      "Um helgina fara Jón og vinir hans í útilegu á Suðurlandi.",
+      "Þeir setja upp tjöld nálægt lítilli á og kveikja varðeld.",
+      "Um nóttina er himinninn skýr og þau sjá ótal stjörnur.",
+      "Morguninn eftir vakna þau við hljóð úr fuglum og vindi.",
+      "Jón segir að náttúran róisér hann meira en nokkuð annað."
+    ],
+    translation: "Over the weekend Jón and his friends go camping in the South. They set up tents near a small river and light a campfire. During the night the sky is clear and they see countless stars. The next morning they wake up to the sound of birds and wind. Jón says that nature calms him more than anything else.",
+    hints: ["útilegu: camping trip", "varðeld: campfire", "ótal: countless"],
+    checks: [
+      { prompt: "Where do they set up their tents?", options: ["near a small river", "on a mountain top", "next to the ocean"], answer: "near a small river" },
+      { prompt: "What wakes them up the next morning?", options: ["birds and wind", "an alarm clock", "rain"], answer: "birds and wind" }
+    ]
+  },
+  {
+    id: "a2-whale",
+    level: "A2",
+    topic: "nature",
+    title: "Ég sé hval!",
+    minutes: 8,
+    text: [
+      "Björg fer í hvalaskoðunarferð frá höfninni í Reykjavík.",
+      "Báturinn siglir langt út á haf í köldum en björtum morgni.",
+      "Eftir klukkutíma bendir leiðsögumaðurinn skyndilega í átt að öldunum.",
+      "„Þarna, sjáið! Hnúfubakur!“ hrópar hann spenntur.",
+      "Björg tekur upp myndavélina, en er of hissa til að ýta á takkann."
+    ],
+    translation: "Björg goes on a whale-watching trip from the harbor in Reykjavík. The boat sails far out to sea on a cold but bright morning. After an hour the guide suddenly points toward the waves. 'There, look! A humpback whale!' he shouts excitedly. Björg picks up her camera, but is too surprised to press the button.",
+    hints: ["hvalaskoðunarferð: whale-watching trip", "leiðsögumaðurinn: the guide", "hnúfubakur: humpback whale"],
+    checks: [
+      { prompt: "What kind of whale do they see?", options: ["a humpback whale", "a killer whale", "a blue whale"], answer: "a humpback whale" },
+      { prompt: "Why doesn't Björg take a photo right away?", options: ["she is too surprised", "her camera is broken", "the whale is too far away"], answer: "she is too surprised" }
+    ]
+  },
+  {
+    id: "a2b1-phone",
+    level: "A2-B1",
+    topic: "problems",
+    title: "Hvar er farsíminn minn?",
+    minutes: 8,
+    text: [
+      "Óli leitar að farsímanum sínum um alla íbúðina.",
+      "Hann man að hann átti hann þegar hann kom heim úr vinnunni.",
+      "Eftir smá leit finnur hann símann undir sófapúðanum.",
+      "Því miður er skjárinn sprunginn eftir að hafa dottið á gólfið.",
+      "Óli andvarpar og ákveður að fara með hann í viðgerð daginn eftir."
+    ],
+    translation: "Óli searches for his cell phone all over the apartment. He remembers that he had it when he came home from work. After a short search he finds the phone under the sofa cushion. Unfortunately the screen is cracked after falling on the floor. Óli sighs and decides to take it in for repair the next day.",
+    hints: ["leitar að: searches for", "sprunginn: cracked", "andvarpar: sighs"],
+    checks: [
+      { prompt: "Where does Óli find his phone?", options: ["under the sofa cushion", "in his coat pocket", "in the kitchen"], answer: "under the sofa cushion" },
+      { prompt: "What is wrong with the phone?", options: ["the screen is cracked", "the battery is dead", "it is missing"], answer: "the screen is cracked" }
+    ]
+  },
+  {
+    id: "b1-goodbye",
+    level: "A2-B1",
+    topic: "farewells",
+    title: "Kveðjustund",
+    minutes: 10,
+    text: [
+      "Eftir eitt ár í Reykjavík er komið að því að Mark fljúgi heim.",
+      "Vinir hans skipuleggja litla kveðjuveislu kvöldið áður.",
+      "Þau rifja upp skemmtileg atvik og hlæja að gömlum myndum.",
+      "Mark segir að hann muni sakna íslenska veðursins, sem kemur öllum á óvart.",
+      "Þegar hann kveður á flugvellinum lofar hann að koma aftur fljótlega."
+    ],
+    translation: "After one year in Reykjavík, the time has come for Mark to fly home. His friends organize a small farewell party the evening before. They reminisce about funny incidents and laugh at old photos. Mark says that he will miss the Icelandic weather, which surprises everyone. When he says goodbye at the airport, he promises to come back soon.",
+    hints: ["kveðjuveislu: farewell party", "rifja upp: to reminisce, look back on", "kemur á óvart: comes as a surprise"],
+    checks: [
+      { prompt: "What surprises Mark's friends?", options: ["that he will miss the weather", "that he is leaving early", "that he forgot his passport"], answer: "that he will miss the weather" },
+      { prompt: "What does Mark promise at the airport?", options: ["to come back soon", "to write every week", "to move back permanently"], answer: "to come back soon" }
+    ]
   }
 ];
 
@@ -1248,11 +1428,281 @@ const grammarTopics = [
   }
 ];
 
+const novels = [
+  {
+    id: "nyja-ibudin",
+    level: "A1",
+    title: "Nýja íbúðin",
+    subtitle: "The New Apartment",
+    tagline: "Elín moves to Reykjavík and slowly finds her footing in a new city.",
+    chapters: [
+      {
+        title: "1. Flutningurinn",
+        subtitle: "The Move",
+        text: [
+          "Elín flytur í nýja íbúð í Reykjavík.",
+          "Íbúðin er lítil en björt.",
+          "Það eru þrjú herbergi og lítið eldhús.",
+          "Elín setur bækurnar sínar á hilluna.",
+          "Hún er þreytt en ánægð."
+        ],
+        translation: "Elín moves into a new apartment in Reykjavík. The apartment is small but bright. There are three rooms and a small kitchen. Elín puts her books on the shelf. She is tired but happy.",
+        hints: ["flytur: moves / is moving", "björt: bright", "hilluna: the shelf"],
+        checks: [
+          { prompt: "How does Elín feel at the end of the chapter?", options: ["tired but happy", "angry", "bored"], answer: "tired but happy" },
+          { prompt: "How many rooms does the apartment have?", options: ["three", "five", "one"], answer: "three" }
+        ]
+      },
+      {
+        title: "2. Nágranninn",
+        subtitle: "The Neighbor",
+        text: [
+          "Daginn eftir heyrir Elín bank á dyrnar.",
+          "Fyrir utan stendur maður með köku.",
+          "„Hæ, ég heiti Baldur. Ég bý hérna við hliðina,“ segir hann.",
+          "Elín brosir og býður honum inn.",
+          "Þau tala saman um Reykjavík og veðrið."
+        ],
+        translation: "The next day Elín hears a knock on the door. Outside stands a man with a cake. 'Hi, I'm Baldur. I live right next door,' he says. Elín smiles and invites him in. They talk together about Reykjavík and the weather.",
+        hints: ["bank á dyrnar: a knock on the door", "við hliðina: next door", "brosir: smiles"],
+        checks: [
+          { prompt: "What does Baldur bring?", options: ["a cake", "flowers", "a book"], answer: "a cake" },
+          { prompt: "What do Elín and Baldur talk about?", options: ["Reykjavík and the weather", "work", "money"], answer: "Reykjavík and the weather" }
+        ]
+      },
+      {
+        title: "3. Á kaffihúsinu",
+        subtitle: "At the Café",
+        text: [
+          "Um helgina fara Elín og Baldur á kaffihús saman.",
+          "Þau panta kaffi og kanilsnúð.",
+          "Baldur segir að hann vinni í banka.",
+          "Elín segir að hún sé að læra íslensku.",
+          "„Þú talar mjög vel!“ segir Baldur."
+        ],
+        translation: "On the weekend Elín and Baldur go to a café together. They order coffee and a cinnamon roll. Baldur says that he works at a bank. Elín says that she is learning Icelandic. 'You speak very well!' says Baldur.",
+        hints: ["kanilsnúð: cinnamon roll", "vinni: works (subjunctive after segir að)", "mjög vel: very well"],
+        checks: [
+          { prompt: "What do they order?", options: ["coffee and a cinnamon roll", "tea and bread", "juice and cake"], answer: "coffee and a cinnamon roll" },
+          { prompt: "Where does Baldur work?", options: ["at a bank", "at a hospital", "at a school"], answer: "at a bank" }
+        ]
+      },
+      {
+        title: "4. Nýir vinir",
+        subtitle: "New Friends",
+        text: [
+          "Eftir nokkrar vikur þekkir Elín marga í hverfinu.",
+          "Hún talar íslensku á hverjum degi.",
+          "Baldur býður henni í matarboð með vinum sínum.",
+          "Elín er ekki lengur ein í nýju borginni.",
+          "Hún brosir þegar hún hugsar um fyrsta daginn í íbúðinni."
+        ],
+        translation: "After a few weeks Elín knows many people in the neighborhood. She speaks Icelandic every day. Baldur invites her to a dinner party with his friends. Elín is no longer alone in the new city. She smiles when she thinks about the first day in the apartment.",
+        hints: ["hverfinu: the neighborhood", "matarboð: dinner party", "ekki lengur: no longer"],
+        checks: [
+          { prompt: "What does Elín do every day now?", options: ["speak Icelandic", "clean the apartment", "travel"], answer: "speak Icelandic" },
+          { prompt: "What does Baldur invite Elín to?", options: ["a dinner party", "a concert", "a trip"], answer: "a dinner party" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "leyndarmalid",
+    level: "A2",
+    title: "Leyndarmálið á kaffihúsinu",
+    subtitle: "The Secret at the Café",
+    tagline: "A barista finds an old man's forgotten book, and a fifty-year-old story inside it.",
+    chapters: [
+      {
+        title: "1. Undarlegur gestur",
+        subtitle: "A Strange Customer",
+        text: [
+          "Sigga vinnur á litlu kaffihúsi í miðbænum.",
+          "Á hverjum morgni kemur sami gamli maðurinn og pantar svart kaffi.",
+          "Hann talar aldrei við neinn og situr alltaf við sama borðið.",
+          "Í dag skilur hann eftir litla, gamla bók á borðinu.",
+          "Sigga tekur bókina og skoðar hana forvitin."
+        ],
+        translation: "Sigga works at a small café downtown. Every morning the same old man comes and orders black coffee. He never talks to anyone and always sits at the same table. Today he leaves a small, old book on the table. Sigga takes the book and looks at it, curious.",
+        hints: ["skilur eftir: leaves behind", "forvitin: curious", "sami: the same"],
+        checks: [
+          { prompt: "How often does the old man come?", options: ["every morning", "once a week", "only today"], answer: "every morning" },
+          { prompt: "What does he leave behind?", options: ["a small old book", "his coat", "money"], answer: "a small old book" }
+        ]
+      },
+      {
+        title: "2. Bókin",
+        subtitle: "The Book",
+        text: [
+          "Bókin er full af gömlum bréfum og myndum.",
+          "Í einu bréfi stendur nafnið Guðrún og ártalið 1962.",
+          "Sigga sér mynd af ungri konu fyrir framan sama kaffihúsið.",
+          "Húsið lítur næstum eins út, en göturnar eru öðruvísi.",
+          "Sigga spyr sjálfa sig: hver var Guðrún?"
+        ],
+        translation: "The book is full of old letters and photos. In one letter is the name Guðrún and the year 1962. Sigga sees a photo of a young woman in front of the same café. The building looks almost the same, but the streets are different. Sigga asks herself: who was Guðrún?",
+        hints: ["bréfum: letters", "ártalið: the year (date)", "spyr sjálfa sig: asks herself"],
+        checks: [
+          { prompt: "What year is written in the letter?", options: ["1962", "1990", "2005"], answer: "1962" },
+          { prompt: "What is unusual about the photo?", options: ["the streets look different", "the woman is Sigga", "the café doesn't exist"], answer: "the streets look different" }
+        ]
+      },
+      {
+        title: "3. Gamli maðurinn kemur aftur",
+        subtitle: "The Old Man Returns",
+        text: [
+          "Daginn eftir kemur gamli maðurinn aftur inn á kaffihúsið.",
+          "Sigga réttir honum bókina og spyr varlega um Guðrúnu.",
+          "Maðurinn verður hljóður og horfir lengi út um gluggann.",
+          "„Guðrún var konan mín,“ segir hann að lokum.",
+          "„Hún vann hérna fyrir meira en fimmtíu árum.“"
+        ],
+        translation: "The next day the old man comes into the café again. Sigga hands him the book and carefully asks about Guðrún. The man becomes quiet and looks out the window for a long time. 'Guðrún was my wife,' he says at last. 'She worked here more than fifty years ago.'",
+        hints: ["réttir: hands (something to someone)", "verður hljóður: becomes quiet", "að lokum: at last, finally"],
+        checks: [
+          { prompt: "Who was Guðrún to the old man?", options: ["his wife", "his sister", "his teacher"], answer: "his wife" },
+          { prompt: "Where did Guðrún work?", options: ["at the same café", "at a hospital", "at a school"], answer: "at the same café" }
+        ]
+      },
+      {
+        title: "4. Sagan hans",
+        subtitle: "His Story",
+        text: [
+          "Maðurinn segir Siggu alla söguna yfir kaffibolla.",
+          "Hann og Guðrún hittust á kaffihúsinu árið 1961.",
+          "Þau giftu sig ári síðar og bjuggu saman í fjörutíu ár.",
+          "Guðrún lést fyrir þremur árum, en maðurinn kemur enn á hverjum degi.",
+          "„Hér finnst mér ég vera nálægt henni,“ segir hann."
+        ],
+        translation: "The man tells Sigga the whole story over a cup of coffee. He and Guðrún met at the café in 1961. They got married a year later and lived together for forty years. Guðrún passed away three years ago, but the man still comes every day. 'Here I feel close to her,' he says.",
+        hints: ["hittust: met (each other)", "giftu sig: got married", "lést: passed away"],
+        checks: [
+          { prompt: "When did the man and Guðrún meet?", options: ["1961", "1962", "1990"], answer: "1961" },
+          { prompt: "Why does the man still come every day?", options: ["he feels close to her there", "he has nowhere else to go", "he works there"], answer: "he feels close to her there" }
+        ]
+      },
+      {
+        title: "5. Ný hefð",
+        subtitle: "A New Tradition",
+        text: [
+          "Sigga skilar bókinni til mannsins, en hann biður hana að eiga eitt bréfið.",
+          "Hún velur myndina af Guðrúnu fyrir framan kaffihúsið.",
+          "Núna hangir myndin á vegg kaffihússins, öllum til sýnis.",
+          "Gamli maðurinn brosir í hvert sinn sem hann sér hana.",
+          "Sigga hugsar að sumar sögur eigi heima þar sem þær byrjuðu."
+        ],
+        translation: "Sigga returns the book to the man, but he asks her to keep one letter. She chooses the photo of Guðrún in front of the café. Now the photo hangs on the café wall, for everyone to see. The old man smiles every time he sees it. Sigga thinks that some stories belong where they began.",
+        hints: ["skilar: returns (something)", "til sýnis: on display", "eigi heima: belong"],
+        checks: [
+          { prompt: "What does Sigga keep?", options: ["the photo of Guðrún", "the whole book", "nothing"], answer: "the photo of Guðrún" },
+          { prompt: "Where does the photo end up?", options: ["on the café wall", "in a museum", "in the book"], answer: "on the café wall" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "ferdin-nordur",
+    level: "B1",
+    title: "Ferðin norður",
+    subtitle: "The Journey North",
+    tagline: "A weekend road trip to Akureyri does not go quite as planned.",
+    chapters: [
+      {
+        title: "1. Áætlunin",
+        subtitle: "The Plan",
+        text: [
+          "Kristján og Selma ákveða að keyra norður til Akureyrar um helgina.",
+          "Þau hafa aldrei farið saman í svona langa ferð áður.",
+          "Selma segir að þau ættu að leggja af stað snemma til að forðast umferð.",
+          "Kristján hlær og segir að hann sé alltaf tilbúinn fyrir ævintýri.",
+          "Um kvöldið pakka þau niður hlýjum fötum og korti."
+        ],
+        translation: "Kristján and Selma decide to drive north to Akureyri for the weekend. They have never gone on such a long trip together before. Selma says that they should set off early to avoid traffic. Kristján laughs and says that he is always ready for an adventure. In the evening they pack warm clothes and a map.",
+        hints: ["ættu að: should (subjunctive of eiga)", "forðast: to avoid", "tilbúinn: ready"],
+        checks: [
+          { prompt: "Where are Kristján and Selma going?", options: ["Akureyri", "Reykjavík", "Ísafjörður"], answer: "Akureyri" },
+          { prompt: "What does Selma suggest?", options: ["leaving early to avoid traffic", "staying home", "flying instead"], answer: "leaving early to avoid traffic" }
+        ]
+      },
+      {
+        title: "2. Á veginum",
+        subtitle: "On the Road",
+        text: [
+          "Snemma morguns leggja þau af stað í rigningu.",
+          "Eftir nokkrar klukkustundir birtir upp og fjöllin sjást vel.",
+          "Þau stoppa við litla sjoppu og fá sér kaffi og vöfflur.",
+          "Selma tekur myndir af hverunum sem gufa upp úr jörðinni.",
+          "Kristján segir að þetta sé fallegasti hluti Íslands sem hann hafi séð."
+        ],
+        translation: "Early in the morning they set off in the rain. After a few hours it clears up and the mountains are clearly visible. They stop at a small roadside shop and get coffee and waffles. Selma takes pictures of the hot springs steaming up from the ground. Kristján says that this is the most beautiful part of Iceland he has seen.",
+        hints: ["birtir upp: it clears up (weather)", "hverunum: the hot springs", "gufa upp: to steam / give off steam"],
+        checks: [
+          { prompt: "What is the weather like at the start of the drive?", options: ["rainy", "sunny", "snowy"], answer: "rainy" },
+          { prompt: "What does Selma photograph?", options: ["hot springs", "birds", "the ocean"], answer: "hot springs" }
+        ]
+      },
+      {
+        title: "3. Bilunin",
+        subtitle: "The Breakdown",
+        text: [
+          "Rétt fyrir Akureyri byrjar bíllinn að hósta og stoppar svo alveg.",
+          "Kristján reynir að ræsa hann aftur, en ekkert gerist.",
+          "Selma hringir í vegaaðstoð og bíður óþreyjufull eftir svari.",
+          "Á meðan þau bíða, sjá þau hjörð af hestum á næsta akri.",
+          "„Kannski var þetta merki um að við ættum að hvíla okkur,“ segir Selma og hlær."
+        ],
+        translation: "Right before Akureyri the car starts to sputter and then stops completely. Kristján tries to start it again, but nothing happens. Selma calls roadside assistance and waits impatiently for an answer. While they wait, they see a herd of horses in the next field. 'Maybe that was a sign that we should rest,' says Selma, laughing.",
+        hints: ["hósta: to cough / sputter", "vegaaðstoð: roadside assistance", "hjörð: a herd"],
+        checks: [
+          { prompt: "What happens to the car?", options: ["it breaks down", "it runs out of gas", "it gets a flat tire"], answer: "it breaks down" },
+          { prompt: "What do they see while waiting?", options: ["a herd of horses", "a whale", "the northern lights"], answer: "a herd of horses" }
+        ]
+      },
+      {
+        title: "4. Akureyri loksins",
+        subtitle: "Akureyri at Last",
+        text: [
+          "Vegaaðstoðin kemur eftir klukkutíma og gerir við bílinn.",
+          "Þau komast loksins til Akureyrar rétt fyrir myrkur.",
+          "Bærinn er minni en Reykjavík, en göturnar eru fullar af litlum húsum og ljósum.",
+          "Þau fá sér herbergi á litlu hóteli nálægt firðinum.",
+          "Um kvöldið borða þau fiskisúpu og tala um ferðalagið."
+        ],
+        translation: "The roadside assistance arrives after an hour and fixes the car. They finally reach Akureyri right before dark. The town is smaller than Reykjavík, but the streets are full of small houses and lights. They get a room at a small hotel near the fjord. In the evening they eat fish soup and talk about the journey.",
+        hints: ["gerir við: fixes, repairs", "myrkur: darkness", "firðinum: the fjord"],
+        checks: [
+          { prompt: "When do they arrive in Akureyri?", options: ["right before dark", "early morning", "at noon"], answer: "right before dark" },
+          { prompt: "What do they eat that evening?", options: ["fish soup", "lamb", "pizza"], answer: "fish soup" }
+        ]
+      },
+      {
+        title: "5. Heimferðin",
+        subtitle: "The Way Home",
+        text: [
+          "Daginn eftir ganga þau um bæinn og heimsækja grasagarðinn.",
+          "Selma segir að hún hefði gjarnan viljað dvelja lengur.",
+          "Á leiðinni heim rifja þau upp allt sem gerðist: rigninguna, hverina, bilunina.",
+          "Kristján segir að erfiðleikarnir hafi gert ferðina eftirminnilegri.",
+          "Þegar þau koma heim, byrja þau strax að skipuleggja næstu ferð."
+        ],
+        translation: "The next day they walk around town and visit the botanical garden. Selma says that she would gladly have stayed longer. On the way home they recall everything that happened: the rain, the hot springs, the breakdown. Kristján says that the difficulties made the trip more memorable. When they get home, they immediately start planning the next trip.",
+        hints: ["grasagarðinn: the botanical garden", "rifja upp: to recall, look back on", "eftirminnilegri: more memorable"],
+        checks: [
+          { prompt: "What do they visit the next day?", options: ["the botanical garden", "a museum", "a whale-watching boat"], answer: "the botanical garden" },
+          { prompt: "What do they do when they get home?", options: ["start planning the next trip", "go straight to sleep", "call their friends"], answer: "start planning the next trip" }
+        ]
+      }
+    ]
+  }
+];
+
 const state = loadState();
 let currentLessonIndex = Math.min(state.currentLessonIndex ?? 0, lessons.length - 1);
 let currentExerciseIndex = 0;
 let currentGrammarTopicId = null;
 let currentGrammarExerciseIndex = 0;
+let currentNovelId = null;
+let currentChapterIndex = 0;
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -1272,6 +1722,7 @@ function defaultState() {
     exerciseStats: {},
     readingStats: {},
     grammarStats: {},
+    novelProgress: {},
     streak: { count: 0, lastDate: null }
   };
 }
@@ -1800,6 +2251,199 @@ function checkReadingChoice(button) {
   saveState();
 }
 
+function renderNovelList() {
+  const levelSelect = $("#novelLevel");
+  const levels = [...new Set(novels.map((item) => item.level))];
+  levelSelect.innerHTML = `<option value="all">All levels</option>${levels
+    .map((level) => `<option value="${level}">${level}</option>`)
+    .join("")}`;
+
+  const update = () => {
+    const level = levelSelect.value;
+    const filtered = novels.filter((novel) => level === "all" || novel.level === level);
+
+    $("#novelGrid").innerHTML = filtered
+      .map((novel) => {
+        const progress = state.novelProgress?.[novel.id];
+        const done = progress?.completedChapters?.length || 0;
+        return `
+          <article class="course-card">
+            <div class="meta-row">
+              <span class="pill">${novel.level}</span>
+              <span class="pill ${done ? "done" : ""}">${done}/${novel.chapters.length} chapters</span>
+            </div>
+            <h3>${novel.title}</h3>
+            <p>${novel.subtitle}</p>
+            <p>${novel.tagline}</p>
+            <button class="small-action" type="button" data-novel-id="${novel.id}">Open</button>
+          </article>
+        `;
+      })
+      .join("");
+
+    $("#novelGrid")
+      .querySelectorAll("[data-novel-id]")
+      .forEach((button) => {
+        button.addEventListener("click", () => openNovel(button.dataset.novelId));
+      });
+  };
+
+  levelSelect.addEventListener("change", update);
+  update();
+}
+
+function openNovel(id) {
+  currentNovelId = id;
+  const progress = state.novelProgress?.[id];
+  currentChapterIndex = progress?.lastChapterIndex ?? 0;
+  $("#novelDetailWrap").classList.add("is-open");
+  $(".novel-list-wrap").classList.add("is-hidden");
+  renderNovelDetail();
+}
+
+function closeNovelDetail() {
+  currentNovelId = null;
+  $("#novelDetailWrap").classList.remove("is-open");
+  $(".novel-list-wrap").classList.remove("is-hidden");
+  renderNovelList();
+}
+
+function renderNovelDetail() {
+  const novel = novels.find((item) => item.id === currentNovelId);
+  if (!novel) return;
+
+  $("#novelEyebrow").textContent = `Novel - ${novel.level}`;
+  $("#novelTitle").textContent = novel.title;
+  $("#novelTagline").textContent = `${novel.subtitle}. ${novel.tagline}`;
+
+  renderChapterTabs();
+  renderNovelChapter();
+}
+
+function renderChapterTabs() {
+  const novel = novels.find((item) => item.id === currentNovelId);
+  if (!novel) return;
+  const progress = state.novelProgress?.[novel.id];
+  const completed = progress?.completedChapters || [];
+
+  $("#chapterTabs").innerHTML = novel.chapters
+    .map((chapter, index) => {
+      const active = index === currentChapterIndex;
+      const done = completed.includes(index);
+      return `<button class="pill chapter-tab ${active ? "is-active" : ""} ${done ? "done" : ""}" type="button" data-chapter-index="${index}">${index + 1}</button>`;
+    })
+    .join("");
+
+  $("#chapterTabs")
+    .querySelectorAll("[data-chapter-index]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        currentChapterIndex = Number(button.dataset.chapterIndex);
+        saveNovelProgress();
+        renderChapterTabs();
+        renderNovelChapter();
+      });
+    });
+}
+
+function renderNovelChapter() {
+  const novel = novels.find((item) => item.id === currentNovelId);
+  if (!novel) return;
+  const chapter = novel.chapters[currentChapterIndex];
+
+  $("#novelChapterProgress").textContent = `Chapter ${currentChapterIndex + 1}/${novel.chapters.length}`;
+  $("#novelChapterTitle").textContent = `${chapter.title} (${chapter.subtitle})`;
+  $("#novelChapterText").innerHTML = chapter.text.map((line) => `<p>${line}</p>`).join("");
+  $("#novelChapterTranslation").textContent = chapter.translation;
+  $("#novelChapterHints").innerHTML = chapter.hints.map((hint) => `<li>${hint}</li>`).join("");
+
+  $("#novelChapterChecks").innerHTML = chapter.checks
+    .map(
+      (check, index) => `
+        <div class="reading-question">
+          <p>${check.prompt}</p>
+          <div class="choice-grid">
+            ${check.options
+              .map(
+                (option) =>
+                  `<button class="choice" type="button" data-novel-choice data-question-index="${index}" data-answer="${check.answer}">${option}</button>`
+              )
+              .join("")}
+          </div>
+        </div>
+      `
+    )
+    .join("");
+
+  $("#novelChapterChecks")
+    .querySelectorAll("[data-novel-choice]")
+    .forEach((button) => {
+      button.addEventListener("click", () => checkNovelChoice(button));
+    });
+
+  $("#novelPrevChapter").disabled = currentChapterIndex === 0;
+  $("#novelNextChapter").disabled = currentChapterIndex === novel.chapters.length - 1;
+  $("#novelNextChapter").textContent =
+    currentChapterIndex === novel.chapters.length - 1 ? "The end" : "Next chapter →";
+}
+
+function checkNovelChoice(button) {
+  const questionIndex = button.dataset.questionIndex;
+  const answer = button.dataset.answer;
+  const group = $$(`#novelChapterChecks [data-question-index="${questionIndex}"]`);
+  const correct = button.textContent === answer;
+
+  group.forEach((item) => {
+    item.disabled = true;
+    if (item.textContent === answer) item.classList.add("is-correct");
+  });
+  if (!correct) button.classList.add("is-wrong");
+
+  recordNovelCheck(correct);
+}
+
+function recordNovelCheck(correct) {
+  const novel = novels.find((item) => item.id === currentNovelId);
+  if (!novel) return;
+  const chapter = novel.chapters[currentChapterIndex];
+
+  state.novelProgress = state.novelProgress || {};
+  const progress = state.novelProgress[novel.id] || {
+    lastChapterIndex: currentChapterIndex,
+    chapterStats: {},
+    completedChapters: []
+  };
+  const key = String(currentChapterIndex);
+  const stat = progress.chapterStats[key] || { correct: 0, total: 0 };
+  stat.correct += correct ? 1 : 0;
+  stat.total += 1;
+  progress.chapterStats[key] = stat;
+  if (stat.total >= chapter.checks.length && !progress.completedChapters.includes(currentChapterIndex)) {
+    progress.completedChapters.push(currentChapterIndex);
+  }
+  state.novelProgress[novel.id] = progress;
+  saveState();
+  renderChapterTabs();
+}
+
+function saveNovelProgress() {
+  if (!currentNovelId) return;
+  state.novelProgress = state.novelProgress || {};
+  const progress = state.novelProgress[currentNovelId] || { chapterStats: {}, completedChapters: [] };
+  progress.lastChapterIndex = currentChapterIndex;
+  state.novelProgress[currentNovelId] = progress;
+  saveState();
+}
+
+function navigateChapter(delta) {
+  const novel = novels.find((item) => item.id === currentNovelId);
+  if (!novel) return;
+  currentChapterIndex = Math.max(0, Math.min(novel.chapters.length - 1, currentChapterIndex + delta));
+  saveNovelProgress();
+  renderChapterTabs();
+  renderNovelChapter();
+}
+
 function renderReview() {
   const completedIds = Object.keys(state.completed);
   const reviewItems = completedIds.length
@@ -1943,6 +2587,7 @@ function init() {
   renderLesson();
   renderGrammarList();
   renderReading();
+  renderNovelList();
   renderVocabulary();
   drawIcelandCanvas();
 
@@ -1951,6 +2596,19 @@ function init() {
   });
 
   $("#grammarBack").addEventListener("click", closeGrammarDetail);
+
+  $$(".mode-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      $$(".mode-tab").forEach((item) => item.classList.toggle("is-active", item === tab));
+      const mode = tab.dataset.readingMode;
+      $(".reading-passages-wrap").classList.toggle("is-hidden", mode !== "passages");
+      $(".reading-novels-wrap").classList.toggle("is-hidden", mode !== "novels");
+    });
+  });
+
+  $("#novelBack").addEventListener("click", closeNovelDetail);
+  $("#novelPrevChapter").addEventListener("click", () => navigateChapter(-1));
+  $("#novelNextChapter").addEventListener("click", () => navigateChapter(1));
 
   $("#startLesson").addEventListener("click", () => {
     showView("today");

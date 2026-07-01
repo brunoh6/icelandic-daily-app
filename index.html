@@ -133,17 +133,61 @@
         <section class="view" id="readingView" aria-label="Reading practice">
           <div class="section-title">
             <h2>Reading</h2>
-            <p>Short original texts by level, with vocabulary hints and comprehension checks.</p>
+            <p>Short original texts and graded novels, with vocabulary hints and comprehension checks.</p>
           </div>
-          <div class="tool-row">
-            <select id="readingLevel" aria-label="Reading level">
-              <option value="all">All levels</option>
-            </select>
-            <select id="readingTopic" aria-label="Reading topic">
-              <option value="all">All topics</option>
-            </select>
+
+          <div class="mode-toggle" role="tablist" aria-label="Reading mode">
+            <button class="mode-tab is-active" data-reading-mode="passages" type="button">Passages</button>
+            <button class="mode-tab" data-reading-mode="novels" type="button">Novels</button>
           </div>
-          <div class="reading-grid" id="readingGrid"></div>
+
+          <div class="reading-passages-wrap">
+            <div class="tool-row">
+              <select id="readingLevel" aria-label="Reading level">
+                <option value="all">All levels</option>
+              </select>
+              <select id="readingTopic" aria-label="Reading topic">
+                <option value="all">All topics</option>
+              </select>
+            </div>
+            <div class="reading-grid" id="readingGrid"></div>
+          </div>
+
+          <div class="reading-novels-wrap is-hidden">
+            <div class="novel-list-wrap">
+              <div class="tool-row">
+                <select id="novelLevel" aria-label="Novel level">
+                  <option value="all">All levels</option>
+                </select>
+              </div>
+              <div class="novel-grid" id="novelGrid"></div>
+            </div>
+
+            <div class="novel-detail-wrap" id="novelDetailWrap">
+              <button class="small-action" id="novelBack" type="button">&larr; All novels</button>
+              <article class="lesson-card">
+                <div class="section-heading">
+                  <p id="novelEyebrow">Novel</p>
+                  <span id="novelChapterProgress"></span>
+                </div>
+                <h2 id="novelTitle" class="grammar-topic-title"></h2>
+                <p id="novelTagline" class="rich-text"></p>
+                <div class="chapter-tabs" id="chapterTabs"></div>
+                <h3 id="novelChapterTitle"></h3>
+                <div class="reading-text" id="novelChapterText" lang="is"></div>
+                <details>
+                  <summary>English sense and hints</summary>
+                  <p id="novelChapterTranslation"></p>
+                  <ul id="novelChapterHints"></ul>
+                </details>
+                <div class="reading-checks" id="novelChapterChecks"></div>
+                <div class="hero-actions">
+                  <button class="secondary-action" id="novelPrevChapter" type="button">&larr; Previous chapter</button>
+                  <button class="primary-action" id="novelNextChapter" type="button">Next chapter &rarr;</button>
+                </div>
+              </article>
+            </div>
+          </div>
         </section>
 
         <section class="view" id="vocabularyView" aria-label="Vocabulary">

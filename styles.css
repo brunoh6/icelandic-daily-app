@@ -348,6 +348,7 @@ button {
 
 .course-grid,
 .grammar-grid,
+.novel-grid,
 .reading-grid,
 .vocab-grid,
 .review-list {
@@ -517,12 +518,68 @@ details ul {
   display: none;
 }
 
-.grammar-detail-wrap {
+.grammar-detail-wrap,
+.novel-detail-wrap {
   display: none;
 }
 
-.grammar-detail-wrap.is-open {
+.grammar-detail-wrap.is-open,
+.novel-detail-wrap.is-open {
   display: block;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  background: var(--panel);
+}
+
+.mode-tab {
+  min-height: 36px;
+  border: none;
+  border-radius: 999px;
+  padding: 0 16px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.mode-tab.is-active {
+  background: #d6c7a6;
+  color: #111820;
+}
+
+.novel-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.chapter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.chapter-tab {
+  min-width: 36px;
+  border: 1px solid #334a60;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.chapter-tab.is-active {
+  border-color: var(--soft);
+  color: var(--soft);
+}
+
+.chapter-tab.done {
+  border-color: rgba(114, 199, 174, 0.55);
+  color: var(--green);
 }
 
 .grammar-topic-title {
