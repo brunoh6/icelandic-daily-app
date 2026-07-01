@@ -247,6 +247,10 @@ button {
   grid-row: span 2;
 }
 
+.grammar-detail-wrap .lesson-card:first-child {
+  grid-row: auto;
+}
+
 .section-heading,
 .section-title {
   display: flex;
@@ -343,6 +347,7 @@ button {
 }
 
 .course-grid,
+.grammar-grid,
 .reading-grid,
 .vocab-grid,
 .review-list {
@@ -350,7 +355,8 @@ button {
   gap: 12px;
 }
 
-.course-grid {
+.course-grid,
+.grammar-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
@@ -507,6 +513,48 @@ details ul {
   gap: 12px;
 }
 
+.is-hidden {
+  display: none;
+}
+
+.grammar-detail-wrap {
+  display: none;
+}
+
+.grammar-detail-wrap.is-open {
+  display: block;
+}
+
+.grammar-topic-title {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.grammar-table {
+  width: 100%;
+  margin: 12px 0 20px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.grammar-table th,
+.grammar-table td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.grammar-table th {
+  background: var(--panel-2);
+  color: var(--soft);
+  font-weight: 700;
+}
+
+.grammar-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
 @media (max-width: 860px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -519,7 +567,7 @@ details ul {
   }
 
   .tabs {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .tab {
@@ -546,7 +594,7 @@ details ul {
 
 @media (max-width: 520px) {
   .tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .top-band,

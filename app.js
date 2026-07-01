@@ -649,9 +649,351 @@ const readings = [
   }
 ];
 
+const grammarTopics = [
+  {
+    id: "gender-articles",
+    level: "A0",
+    category: "Nouns",
+    title: "Gender and the Definite Article",
+    summary: "Masculine, feminine, neuter, and the suffixed article that replaces 'the'.",
+    theory: [
+      "Icelandic nouns have three grammatical genders: masculine, feminine, and neuter. Gender affects a noun's ending, its definite article, and which forms of adjectives and pronouns agree with it.",
+      "There is no separate word for 'the'. Instead, a suffix attaches to the end of the noun, and that suffix carries gender and case information on its own.",
+      "Gender is not always predictable from meaning, so it is more efficient to learn each noun together with its gender and definite form rather than deriving it from a rule every time."
+    ],
+    tables: [
+      {
+        title: "Definite article by gender (nominative singular)",
+        headers: ["Gender", "Indefinite", "Definite", "Meaning"],
+        rows: [
+          ["Masculine", "dagur", "dagurinn", "day / the day"],
+          ["Feminine", "taska", "taskan", "bag / the bag"],
+          ["Neuter", "borð", "borðið", "table / the table"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Hótelið er stórt.", en: "The hotel is big." },
+      { is: "Taskan er þung.", en: "The bag is heavy." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which ending is typical for many masculine nouns?", options: ["-ur", "-a", "no ending", "-ið"], answer: "-ur" },
+      { type: "choice", prompt: "What is the definite form of taska (bag)?", options: ["taskan", "taskaið", "taskurinn", "taskar"], answer: "taskan" },
+      { type: "type", prompt: "Add the definite article to borð (table).", answer: "borðið", hint: "Neuter nouns often take -ið." }
+    ]
+  },
+  {
+    id: "cases-overview",
+    level: "A1",
+    category: "Cases",
+    title: "The Four Cases at a Glance",
+    summary: "What nominative, accusative, dative, and genitive each do in a sentence.",
+    theory: [
+      "Icelandic has four grammatical cases: nominative, accusative, dative, and genitive. The case of a noun shows the role it plays in the sentence, not just its position in the word order.",
+      "Nominative marks the subject, the one doing the action. Accusative usually marks a direct object. Dative often marks an indirect object or follows certain prepositions and verbs. Genitive shows possession, similar to English 's or 'of'.",
+      "Verbs and prepositions each expect a specific case from the noun that follows them, so it helps to learn short phrases as whole units instead of translating word by word."
+    ],
+    tables: [
+      {
+        title: "Case function summary",
+        headers: ["Case", "Typical role", "Example"],
+        rows: [
+          ["Nominative", "subject", "Hundurinn sefur. (The dog sleeps.)"],
+          ["Accusative", "direct object", "Ég sé hundinn. (I see the dog.)"],
+          ["Dative", "indirect object / after some prepositions", "Ég gef hundinum kjöt. (I give the dog meat.)"],
+          ["Genitive", "possession", "Nafn hundsins er Leo. (The dog's name is Leo.)"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Ég sé hótelið.", en: "I see the hotel. (accusative)" },
+      { is: "Hann talar við konuna.", en: "He talks with the woman. (accusative after við)" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which case usually marks the subject of a sentence?", options: ["nominative", "accusative", "dative", "genitive"], answer: "nominative" },
+      { type: "choice", prompt: "Which case typically shows possession?", options: ["genitive", "nominative", "accusative", "dative"], answer: "genitive" },
+      { type: "choice", prompt: "In 'Ég sé hundinn', what role does hundinn play?", options: ["direct object", "subject", "possessor", "indirect object"], answer: "direct object" }
+    ]
+  },
+  {
+    id: "pronouns",
+    level: "A0",
+    category: "Pronouns",
+    title: "Personal Pronouns",
+    summary: "Nominative and accusative pronouns, including the gendered forms of 'they'.",
+    theory: [
+      "Icelandic pronouns change form depending on case, the same way nouns do. Learning the nominative and accusative forms first covers most everyday sentences.",
+      "The third person singular has three genders: hann (he), hún (she), það (it), matching the grammatical gender of the noun referred to, not necessarily biological sex.",
+      "Plural forms of 'they' also show gender: þeir (masculine or mixed group), þær (feminine), þau (neuter or a mixed group that includes a neuter noun)."
+    ],
+    tables: [
+      {
+        title: "Personal pronouns (nominative and accusative)",
+        headers: ["Person", "Nominative", "Accusative", "English"],
+        rows: [
+          ["1st sg", "ég", "mig", "I / me"],
+          ["2nd sg", "þú", "þig", "you / you"],
+          ["3rd sg m", "hann", "hann", "he / him"],
+          ["3rd sg f", "hún", "hana", "she / her"],
+          ["3rd sg n", "það", "það", "it / it"],
+          ["1st pl", "við", "okkur", "we / us"],
+          ["2nd pl", "þið", "ykkur", "you (pl) / you (pl)"],
+          ["3rd pl", "þeir / þær / þau", "þá / þær / þau", "they / them"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Hún sér hana.", en: "She sees her." },
+      { is: "Við tölum við ykkur.", en: "We talk to you (pl)." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which pronoun means 'she'?", options: ["hún", "hann", "það", "þau"], answer: "hún" },
+      { type: "type", prompt: "Translate: We see you (plural).", answer: "Við sjáum ykkur", hint: "Use the accusative form of þið." },
+      { type: "choice", prompt: "Which pronoun is used for a mixed or neuter group?", options: ["þau", "þeir", "þær", "þið"], answer: "þau" }
+    ]
+  },
+  {
+    id: "present-tense",
+    level: "A1",
+    category: "Verbs",
+    title: "Present Tense Verbs",
+    summary: "Regular weak-verb endings, plus the irregular vera (to be).",
+    theory: [
+      "Most Icelandic verbs follow one of a few regular present-tense patterns. Learning the pattern for tala (to speak) covers a large share of everyday weak verbs.",
+      "The verb stem stays fairly stable; endings mark the person. Þú typically adds -r or -rð, the 3rd person singular usually matches the þú form, and all plural persons often share one ending in a given class.",
+      "Vera (to be) is irregular and worth memorizing as fixed forms since it appears constantly."
+    ],
+    tables: [
+      {
+        title: "Present tense of tala (to speak)",
+        headers: ["Person", "Form"],
+        rows: [
+          ["ég", "tala"],
+          ["þú", "talar"],
+          ["hann / hún / það", "talar"],
+          ["við", "tölum"],
+          ["þið", "talið"],
+          ["þeir / þær / þau", "tala"]
+        ]
+      },
+      {
+        title: "Present tense of vera (to be)",
+        headers: ["Person", "Form"],
+        rows: [
+          ["ég", "er"],
+          ["þú", "ert"],
+          ["hann / hún / það", "er"],
+          ["við", "erum"],
+          ["þið", "eruð"],
+          ["þeir / þær / þau", "eru"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Þau tala íslensku.", en: "They speak Icelandic." },
+      { is: "Við erum þreytt.", en: "We are tired." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What is the þú form of tala?", options: ["talar", "tala", "tölum", "talið"], answer: "talar" },
+      { type: "type", prompt: "Give the við form of vera.", answer: "erum" },
+      { type: "choice", prompt: "Which form matches þið in the present tense of tala?", options: ["talið", "talar", "tala", "tölum"], answer: "talið" }
+    ]
+  },
+  {
+    id: "past-tense",
+    level: "A2",
+    category: "Verbs",
+    title: "Past Tense Verbs",
+    summary: "Weak verbs add a dental suffix; strong verbs change their stem vowel.",
+    theory: [
+      "Weak verbs form the past tense with a dental suffix, usually -aði, -di, or -ti added to the stem. Tala (to speak) becomes talaði in the past.",
+      "Strong verbs change their stem vowel instead, similar to English sing/sang/sung. Fara (to go) becomes fór in the past, and koma (to come) becomes kom.",
+      "Strong verb patterns are not fully predictable, so it is efficient to memorize the past tense of common strong verbs individually rather than deriving it from a rule."
+    ],
+    tables: [
+      {
+        title: "Past tense examples",
+        headers: ["Infinitive", "Type", "Past (ég form)", "English"],
+        rows: [
+          ["tala", "weak", "talaði", "I spoke"],
+          ["læra", "weak", "lærði", "I learned"],
+          ["fara", "strong", "fór", "I went"],
+          ["koma", "strong", "kom", "I came"],
+          ["sjá", "strong", "sá", "I saw"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Í gær fór ég til Akureyrar.", en: "Yesterday I went to Akureyri." },
+      { is: "Hún lærði nýtt orð.", en: "She learned a new word." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What is the past tense (ég form) of fara?", options: ["fór", "fara", "fer", "farði"], answer: "fór" },
+      { type: "type", prompt: "Give the past tense of tala (ég form).", answer: "talaði" },
+      { type: "choice", prompt: "Which pattern do strong verbs use in the past tense?", options: ["a stem vowel change", "adding -aði", "adding -ir", "no change at all"], answer: "a stem vowel change" }
+    ]
+  },
+  {
+    id: "adjectives",
+    level: "A2",
+    category: "Adjectives",
+    title: "Adjective Agreement",
+    summary: "Adjectives change to match the gender, number, and case of the noun.",
+    theory: [
+      "Icelandic adjectives agree with the noun they describe in gender, number, and case. The same adjective, good, changes shape depending on whether the noun is masculine, feminine, or neuter.",
+      "In the indefinite (strong) form, used mostly after 'is/are' or with indefinite nouns, endings vary by gender: typically no ending or -ur for masculine, no ending or -/-a for feminine, and -t for neuter.",
+      "After a definite article, demonstrative, or possessive, adjectives usually switch to the weak declension, which is more uniform across genders, often ending in -i or -a."
+    ],
+    tables: [
+      {
+        title: "Indefinite adjective góður (good) by gender, nominative singular",
+        headers: ["Gender", "Noun example", "Adjective form"],
+        rows: [
+          ["Masculine", "dagur (day)", "góður dagur"],
+          ["Feminine", "taska (bag)", "góð taska"],
+          ["Neuter", "borð (table)", "gott borð"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Þetta er góður dagur.", en: "This is a good day." },
+      { is: "Kaffið er gott.", en: "The coffee is good." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which form of 'good' matches borð (neuter)?", options: ["gott", "góður", "góð", "góðir"], answer: "gott" },
+      { type: "choice", prompt: "Which form of 'good' matches taska (feminine)?", options: ["góð", "góður", "gott", "góðar"], answer: "góð" },
+      { type: "type", prompt: "Complete: ___ dagur (good day), masculine form.", answer: "góður" }
+    ]
+  },
+  {
+    id: "word-order",
+    level: "A1",
+    category: "Sentence Structure",
+    title: "Word Order and Questions",
+    summary: "Verb-second order, yes/no inversion, and wh-question structure.",
+    theory: [
+      "Icelandic is a verb-second (V2) language: the finite verb is normally the second element in a statement, even when something other than the subject comes first.",
+      "To form a yes/no question, invert the subject and verb: Talar þú íslensku? (Do you speak Icelandic?) instead of adding a helper word like 'do'.",
+      "Wh-questions place the question word first, followed immediately by the verb, then the subject: Hvað heitir þú? (What is your name?)."
+    ],
+    examples: [
+      { is: "Í dag lærum við ný orð.", en: "Today we learn new words. (verb stays second)" },
+      { is: "Hvar býrð þú?", en: "Where do you live?" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "What comes right after the question word in an Icelandic wh-question?", options: ["the verb", "the subject", "the object", "nothing"], answer: "the verb" },
+      { type: "choice", prompt: "How do you form a yes/no question from 'Þú talar íslensku'?", options: ["Talar þú íslensku?", "Þú talar íslensku?", "Gerir þú talar íslensku?", "Ert þú talar íslensku?"], answer: "Talar þú íslensku?" },
+      { type: "type", prompt: "Translate: Today we learn new words. Start with Í dag.", answer: "Í dag lærum við ný orð", hint: "Keep the verb in second position." }
+    ]
+  },
+  {
+    id: "numbers-time",
+    level: "A0",
+    category: "Numbers & Time",
+    title: "Numbers and Telling Time",
+    summary: "Gendered forms of 'one', and how the clock and half-hours work.",
+    theory: [
+      "Icelandic numbers 1 to 4 change form depending on the gender of the noun they count (einn/ein/eitt for one), while 5 and above stay the same for every gender.",
+      "Time is told using klukkan (the clock) followed by the hour: klukkan eitt (one o'clock), klukkan tvö (two o'clock).",
+      "Half hours count toward the next hour, similar to German: hálf tvö means 'half past one', not 'half past two'."
+    ],
+    tables: [
+      {
+        title: "The number 'one' by gender",
+        headers: ["Gender", "Form", "Example"],
+        rows: [
+          ["Masculine", "einn", "einn dagur (one day)"],
+          ["Feminine", "ein", "ein taska (one bag)"],
+          ["Neuter", "eitt", "eitt borð (one table)"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Klukkan er hálf tvö.", en: "It is half past one." },
+      { is: "Ég á eina systur.", en: "I have one sister." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which form of 'one' matches taska (feminine)?", options: ["ein", "einn", "eitt", "einir"], answer: "ein" },
+      { type: "choice", prompt: "What does hálf tvö mean?", options: ["half past one", "half past two", "two o'clock", "quarter to two"], answer: "half past one" },
+      { type: "type", prompt: "Translate: one day (masculine).", answer: "einn dagur" }
+    ]
+  },
+  {
+    id: "prepositions",
+    level: "A2",
+    category: "Cases",
+    title: "Prepositions and Case Government",
+    summary: "Why í and á can mean motion or location depending on the case that follows.",
+    theory: [
+      "Every Icelandic preposition governs a specific case, and some prepositions can govern two different cases depending on meaning. Learning the case together with the preposition, as one chunk, avoids guessing later.",
+      "Í and á are the clearest example: they take accusative when describing motion into or onto a place, and dative when describing static location in or on a place. Ég fer í bæinn (accusative, motion) versus Ég er í bænum (dative, location).",
+      "Other common prepositions have a fixed case: frá (from) takes dative, and til (to, toward) takes genitive."
+    ],
+    tables: [
+      {
+        title: "Common prepositions and their case",
+        headers: ["Preposition", "Case", "Meaning", "Example"],
+        rows: [
+          ["í / á (motion)", "accusative", "into / onto", "Ég fer í bæinn."],
+          ["í / á (location)", "dative", "in / on", "Ég er í bænum."],
+          ["frá", "dative", "from", "Ég er frá Perú."],
+          ["til", "genitive", "to, toward", "Ég fer til Íslands."],
+          ["með", "dative", "with", "Ég fer með þér."]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Hann fer á kaffihúsið.", en: "He goes to the cafe. (motion, accusative)" },
+      { is: "Hann er á kaffihúsinu.", en: "He is at the cafe. (location, dative)" }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which case does til usually take?", options: ["genitive", "accusative", "dative", "nominative"], answer: "genitive" },
+      { type: "choice", prompt: "'Í bæinn' (accusative) describes:", options: ["motion into town", "staying in town", "leaving town", "a memory of town"], answer: "motion into town" },
+      { type: "type", prompt: "Translate: I am from Peru.", answer: "Ég er frá Perú" }
+    ]
+  },
+  {
+    id: "subjunctive",
+    level: "B1",
+    category: "Verbs",
+    title: "Intro to the Subjunctive",
+    summary: "Recognizing sé and friends in reported speech, wishes, and doubt.",
+    theory: [
+      "The subjunctive (viðtengingarháttur) is used for indirect speech, wishes, doubt, and some conditional or purpose clauses. It is a shift in mood, not tense.",
+      "A common trigger is reported speech after verbs like segja (say) or halda (think): Hann segir að hún sé þreytt (He says that she is tired) uses sé, the subjunctive of vera, instead of the indicative er.",
+      "At this stage, focus on recognizing the subjunctive forms of vera rather than producing every verb's subjunctive freely."
+    ],
+    tables: [
+      {
+        title: "Subjunctive of vera (present subjunctive)",
+        headers: ["Person", "Form"],
+        rows: [
+          ["ég", "sé"],
+          ["þú", "sért"],
+          ["hann / hún / það", "sé"],
+          ["við", "séum"],
+          ["þið", "séuð"],
+          ["þeir / þær / þau", "séu"]
+        ]
+      }
+    ],
+    examples: [
+      { is: "Ég held að hann sé þreyttur.", en: "I think he is tired. (subjunctive after held að)" },
+      { is: "Hún vonar að veðrið verði gott.", en: "She hopes the weather will be good." }
+    ],
+    exercises: [
+      { type: "choice", prompt: "Which form is the subjunctive of vera for hann?", options: ["sé", "er", "var", "séum"], answer: "sé" },
+      { type: "choice", prompt: "The subjunctive is commonly triggered after which kind of verb?", options: ["verbs like segja and halda for reported speech", "verbs that show location", "verbs in the simple past only", "numbers"], answer: "verbs like segja and halda for reported speech" },
+      { type: "type", prompt: "Complete: Ég held að hann ___ þreyttur. (subjunctive of vera)", answer: "sé" }
+    ]
+  }
+];
+
 const state = loadState();
 let currentLessonIndex = Math.min(state.currentLessonIndex ?? 0, lessons.length - 1);
 let currentExerciseIndex = 0;
+let currentGrammarTopicId = null;
+let currentGrammarExerciseIndex = 0;
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -670,6 +1012,7 @@ function defaultState() {
     completed: {},
     exerciseStats: {},
     readingStats: {},
+    grammarStats: {},
     streak: { count: 0, lastDate: null }
   };
 }
@@ -761,7 +1104,8 @@ function renderExercise() {
 }
 
 function checkChoice(button, exercise) {
-  const buttons = $$(".choice");
+  const host = $("#exerciseHost");
+  const buttons = host.querySelectorAll(".choice");
   buttons.forEach((item) => {
     item.disabled = true;
     if (item.textContent === exercise.answer) item.classList.add("is-correct");
@@ -769,15 +1113,16 @@ function checkChoice(button, exercise) {
   const correct = button.textContent === exercise.answer;
   if (!correct) button.classList.add("is-wrong");
   recordExercise(correct);
-  $(".feedback").textContent = correct ? "Correct. Nice and steady." : `Not yet. Correct answer: ${exercise.answer}`;
+  host.querySelector(".feedback").textContent = correct ? "Correct. Nice and steady." : `Not yet. Correct answer: ${exercise.answer}`;
   window.setTimeout(nextExercise, correct ? 650 : 1250);
 }
 
 function checkTyped(exercise) {
-  const input = $(".answer-input");
+  const host = $("#exerciseHost");
+  const input = host.querySelector(".answer-input");
   const correct = normalize(input.value) === normalize(exercise.answer);
   recordExercise(correct);
-  $(".feedback").textContent = correct ? "Correct. Say it once aloud before moving on." : `Close review: ${exercise.answer}`;
+  host.querySelector(".feedback").textContent = correct ? "Correct. Say it once aloud before moving on." : `Close review: ${exercise.answer}`;
   input.style.borderColor = correct ? "var(--green)" : "var(--red)";
   window.setTimeout(nextExercise, correct ? 750 : 1400);
 }
@@ -859,6 +1204,205 @@ function renderCourse() {
       renderLesson();
     });
   });
+}
+
+function renderGrammarList() {
+  const levelSelect = $("#grammarLevel");
+  const categorySelect = $("#grammarCategory");
+  const levels = [...new Set(grammarTopics.map((item) => item.level))];
+  const categories = [...new Set(grammarTopics.map((item) => item.category))].sort();
+
+  levelSelect.innerHTML = `<option value="all">All levels</option>${levels
+    .map((level) => `<option value="${level}">${level}</option>`)
+    .join("")}`;
+  categorySelect.innerHTML = `<option value="all">All categories</option>${categories
+    .map((category) => `<option value="${category}">${category}</option>`)
+    .join("")}`;
+
+  const update = () => {
+    const level = levelSelect.value;
+    const category = categorySelect.value;
+    const filtered = grammarTopics.filter((topic) => {
+      const matchesLevel = level === "all" || topic.level === level;
+      const matchesCategory = category === "all" || topic.category === category;
+      return matchesLevel && matchesCategory;
+    });
+
+    $("#grammarGrid").innerHTML = filtered
+      .map((topic) => {
+        const stat = state.grammarStats?.[topic.id];
+        const score = stat?.total ? `${Math.round((stat.correct / stat.total) * 100)}%` : "not drilled";
+        return `
+          <article class="course-card">
+            <div class="meta-row">
+              <span class="pill">${topic.level}</span>
+              <span class="pill">${topic.category}</span>
+              <span class="pill ${stat ? "done" : ""}">${score}</span>
+            </div>
+            <h3>${topic.title}</h3>
+            <p>${topic.summary}</p>
+            <button class="small-action" type="button" data-grammar-id="${topic.id}">Open</button>
+          </article>
+        `;
+      })
+      .join("");
+
+    $("#grammarGrid")
+      .querySelectorAll("[data-grammar-id]")
+      .forEach((button) => {
+        button.addEventListener("click", () => openGrammarTopic(button.dataset.grammarId));
+      });
+  };
+
+  levelSelect.addEventListener("change", update);
+  categorySelect.addEventListener("change", update);
+  update();
+}
+
+function openGrammarTopic(id) {
+  currentGrammarTopicId = id;
+  currentGrammarExerciseIndex = 0;
+  $("#grammarDetailWrap").classList.add("is-open");
+  $(".grammar-list-wrap").classList.add("is-hidden");
+  renderGrammarDetail();
+}
+
+function closeGrammarDetail() {
+  currentGrammarTopicId = null;
+  $("#grammarDetailWrap").classList.remove("is-open");
+  $(".grammar-list-wrap").classList.remove("is-hidden");
+  renderGrammarList();
+}
+
+function renderGrammarDetail() {
+  const topic = grammarTopics.find((item) => item.id === currentGrammarTopicId);
+  if (!topic) return;
+
+  $("#grammarTopicEyebrow").textContent = `${topic.category} - ${topic.level}`;
+  $("#grammarTopicLevel").textContent = topic.level;
+  $("#grammarTopicTitle").textContent = topic.title;
+
+  const tablesHtml = (topic.tables || [])
+    .map(
+      (table) => `
+        <h3>${table.title}</h3>
+        <table class="grammar-table">
+          <thead><tr>${table.headers.map((header) => `<th>${header}</th>`).join("")}</tr></thead>
+          <tbody>${table.rows
+            .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
+            .join("")}</tbody>
+        </table>
+      `
+    )
+    .join("");
+
+  const examplesHtml = topic.examples?.length
+    ? `
+      <h3>Examples</h3>
+      <ul>${topic.examples.map((example) => `<li><span lang="is">${example.is}</span> — ${example.en}</li>`).join("")}</ul>
+    `
+    : "";
+
+  $("#grammarTheoryContent").innerHTML = `
+    ${topic.theory.map((item) => `<p>${item}</p>`).join("")}
+    ${tablesHtml}
+    ${examplesHtml}
+  `;
+
+  renderGrammarExercise();
+}
+
+function renderGrammarExercise() {
+  const topic = grammarTopics.find((item) => item.id === currentGrammarTopicId);
+  if (!topic) return;
+  const exercise = topic.exercises[currentGrammarExerciseIndex];
+  $("#grammarExerciseProgress").textContent = `${Math.min(currentGrammarExerciseIndex + 1, topic.exercises.length)}/${topic.exercises.length}`;
+  const host = $("#grammarExerciseHost");
+
+  if (!exercise) {
+    const stat = state.grammarStats?.[topic.id];
+    const score = stat?.total ? `${Math.round((stat.correct / stat.total) * 100)}%` : "0%";
+    host.innerHTML = `
+      <div class="exercise-card">
+        <p class="exercise-prompt">Drill finished. Score for this topic: ${score}.</p>
+        <button class="secondary-action" type="button" data-restart>Practice again</button>
+      </div>
+    `;
+    host.querySelector("[data-restart]").addEventListener("click", () => {
+      currentGrammarExerciseIndex = 0;
+      renderGrammarExercise();
+    });
+    return;
+  }
+
+  if (exercise.type === "choice") {
+    host.innerHTML = `
+      <div class="exercise-card">
+        <p class="exercise-prompt">${exercise.prompt}</p>
+        <div class="choice-grid">
+          ${exercise.options.map((option) => `<button class="choice" type="button">${option}</button>`).join("")}
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+      </div>
+    `;
+    host.querySelectorAll(".choice").forEach((button) => {
+      button.addEventListener("click", () => checkGrammarChoice(button, exercise));
+    });
+  } else {
+    host.innerHTML = `
+      <div class="exercise-card">
+        <p class="exercise-prompt">${exercise.prompt}</p>
+        <input class="answer-input" type="text" autocomplete="off" autocapitalize="sentences" placeholder="${exercise.hint || "Type your answer"}" />
+        <div class="hero-actions">
+          <button class="primary-action" type="button">Check</button>
+          <button class="secondary-action" type="button" data-skip>Skip</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+      </div>
+    `;
+    host.querySelector(".primary-action").addEventListener("click", () => checkGrammarTyped(exercise));
+    host.querySelector("[data-skip]").addEventListener("click", nextGrammarExercise);
+    host.querySelector(".answer-input").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") checkGrammarTyped(exercise);
+    });
+  }
+}
+
+function checkGrammarChoice(button, exercise) {
+  const host = $("#grammarExerciseHost");
+  host.querySelectorAll(".choice").forEach((item) => {
+    item.disabled = true;
+    if (item.textContent === exercise.answer) item.classList.add("is-correct");
+  });
+  const correct = button.textContent === exercise.answer;
+  if (!correct) button.classList.add("is-wrong");
+  recordGrammarExercise(correct);
+  host.querySelector(".feedback").textContent = correct ? "Correct." : `Not yet. Correct answer: ${exercise.answer}`;
+  window.setTimeout(nextGrammarExercise, correct ? 650 : 1250);
+}
+
+function checkGrammarTyped(exercise) {
+  const host = $("#grammarExerciseHost");
+  const input = host.querySelector(".answer-input");
+  const correct = normalize(input.value) === normalize(exercise.answer);
+  recordGrammarExercise(correct);
+  host.querySelector(".feedback").textContent = correct ? "Correct." : `Close review: ${exercise.answer}`;
+  input.style.borderColor = correct ? "var(--green)" : "var(--red)";
+  window.setTimeout(nextGrammarExercise, correct ? 750 : 1400);
+}
+
+function recordGrammarExercise(correct) {
+  state.grammarStats = state.grammarStats || {};
+  const stat = state.grammarStats[currentGrammarTopicId] || { correct: 0, total: 0 };
+  stat.correct += correct ? 1 : 0;
+  stat.total += 1;
+  state.grammarStats[currentGrammarTopicId] = stat;
+  saveState();
+}
+
+function nextGrammarExercise() {
+  currentGrammarExerciseIndex += 1;
+  renderGrammarExercise();
 }
 
 function renderVocabulary() {
@@ -1136,6 +1680,7 @@ function drawWater(ctx, w, h) {
 function init() {
   renderStats();
   renderLesson();
+  renderGrammarList();
   renderReading();
   renderVocabulary();
   drawIcelandCanvas();
@@ -1143,6 +1688,8 @@ function init() {
   $$(".tab").forEach((tab) => {
     tab.addEventListener("click", () => showView(tab.dataset.view));
   });
+
+  $("#grammarBack").addEventListener("click", closeGrammarDetail);
 
   $("#startLesson").addEventListener("click", () => {
     showView("today");
