@@ -19,6 +19,11 @@ right form, complete a paradigm table, assign gender, and say it out loud.
 round 1 masculine and cued, round 5 the same operation inside full sentences with no scaffolding.
 That deliberate repetition is the whole point — it is how declension tables actually become automatic.
 
+**Read** — short graded texts, plus **graded readers**: whole stories told over four or five chapters,
+each with the Icelandic first, a translation you have to ask for, words to lean on, and a
+comprehension check. This is the bridge from A2 to B1 — extended narrative rather than isolated
+sentences.
+
 **Words** — every word with its gender, its full declension or conjugation, and a sentence that shows
 it doing its job. Spaced repetition (SM-2) schedules what comes back and when.
 
@@ -70,6 +75,7 @@ index.html            app shell
 styles/               tokens · base · components · views · session
 js/
   main.js             boot, routing, delegated actions, session launching
+  views/novels.js     the graded readers
   store.js            progress, streak, XP, settings (localStorage)
   srs.js              spaced repetition
   data.js             content loading + indexes (units load lazily)
@@ -81,8 +87,8 @@ js/
 data/
   units/uNN.js        a unit: 6 lessons + the vocabulary it introduces
   src/                grammar-*, drills-*, readings-* (merged by build.js)
-  prepositions.js  verbcases.js  phrases.js
-tools/                build.js · validate.js · serve.js
+  prepositions.js  verbcases.js  phrases.js  novels.js
+tools/                build.js · validate.js · scan.js · serve.js
 sw.js                 offline: network-first shell, cache-first content
 ```
 
@@ -104,3 +110,7 @@ JSON backup from **Me** before clearing site data.
 **Sources.** The curriculum *sequencing* follows the classic beginner progression used by
 *Colloquial Icelandic* (Neijmann, Routledge), and grammatical paradigms are facts about the language.
 Every explanation, example sentence, dialogue, reading and exercise in this app was written for it.
+
+**History.** The three graded readers predate the rebuild — they were written for the earlier
+single-file version of this app and ported into the current data format by `tools/port-novels.js`.
+Everything else in `data/` was authored for the rebuild.

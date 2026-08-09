@@ -26,6 +26,17 @@ export function renderRead() {
       </p>
     </header>
 
+    ${content.novels.length
+      ? html`<button class="card card--press novel-teaser" data-act="novels">
+          <span class="novel-teaser__icon">📚</span>
+          <span class="grow">
+            <span class="novel-teaser__t">Graded readers</span>
+            <span class="tiny dim">${content.novels.length} whole stories, ${content.novels.reduce((a, n) => a + n.chapters.length, 0)} chapters</span>
+          </span>
+          <span class="dim">→</span>
+        </button>`
+      : ""}
+
     <div class="chips">
       <button class="fchip ${readFilter.level === "all" ? "is-active" : ""}" data-act="read-level" data-level="all">
         All ${content.readings.length}

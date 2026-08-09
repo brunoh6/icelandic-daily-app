@@ -14,6 +14,7 @@ export const content = {
   verbCases: [],
   phrases: [],
   readings: [],
+  novels: [],
   ready: false,
   missing: []
 };
@@ -27,6 +28,7 @@ const index = {
   drillById: new Map(),
   drillByCat: new Map(),
   readingById: new Map(),
+  novelById: new Map(),
   unitBySlug: new Map(),
   unitById: new Map(),
   lessonById: new Map(),
@@ -52,7 +54,7 @@ async function tryImport(path, key, fallback = []) {
 export async function loadCore() {
   if (content.ready) return content;
 
-  const [manifest, vocab, grammar, drills, prepositions, verbCases, phrases, readings] = await Promise.all([
+  const [manifest, vocab, grammar, drills, prepositions, verbCases, phrases, readings, novels] = await Promise.all([
     tryImport("../data/manifest.js", "manifest"),
     tryImport("../data/vocab.js", "vocab"),
     tryImport("../data/grammar.js", "grammar"),
@@ -60,10 +62,11 @@ export async function loadCore() {
     tryImport("../data/prepositions.js", "prepositions"),
     tryImport("../data/verbcases.js", "verbCases"),
     tryImport("../data/phrases.js", "phrases"),
-    tryImport("../data/readings.js", "readings")
+    tryImport("../data/readings.js", "readings"),
+    tryImport("../data/novels.js", "novels")
   ]);
 
-  Object.assign(content, { manifest, vocab, grammar, drills, prepositions, verbCases, phrases, readings });
+  Object.assign(content, { manifest, vocab, grammar, drills, prepositions, verbCases, phrases, readings, novels });
   buildIndexes();
   content.ready = true;
   return content;
@@ -102,6 +105,9 @@ function buildIndexes() {
 
   index.readingById.clear();
   for (const r of content.readings) if (r?.id) index.readingById.set(r.id, r);
+
+  index.novelById.clear();
+  for (const n of content.novels) if (n?.id) index.novelById.set(n.id, n);
 
   index.prepByWord.clear();
   for (const p of content.prepositions) if (p?.p) index.prepByWord.set(p.p, p);

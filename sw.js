@@ -33,6 +33,7 @@ const PRECACHE = [
   "./js/views/words.js",
   "./js/views/grammar.js",
   "./js/views/read.js",
+  "./js/views/novels.js",
   "./js/views/me.js",
   "./data/manifest.js",
   "./data/vocab.js",
@@ -41,7 +42,8 @@ const PRECACHE = [
   "./data/prepositions.js",
   "./data/verbcases.js",
   "./data/phrases.js",
-  "./data/readings.js"
+  "./data/readings.js",
+  "./data/novels.js"
 ];
 
 self.addEventListener("install", (event) => {

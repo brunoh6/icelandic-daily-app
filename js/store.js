@@ -30,6 +30,7 @@ function blank() {
     drills: {},
     srs: {},
     words: {},
+    novels: {},
     stats: { correct: 0, answered: 0, byTag: {}, seconds: 0 },
     flags: { onboarded: false },
     reviewedAt: {}
@@ -54,6 +55,7 @@ function migrate(raw) {
     drills: raw.drills || {},
     srs: raw.srs || {},
     words: raw.words || {},
+    novels: raw.novels || {},
     reviewedAt: raw.reviewedAt || {}
   };
   out.v = SCHEMA;

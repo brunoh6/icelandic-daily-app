@@ -17,7 +17,9 @@ export const unitFiles = [
   "./data/units/u15.js",
   "./data/units/u16.js",
   "./data/units/u17.js",
-  "./data/units/u18.js"
+  "./data/units/u18.js",
+  "./data/units/u19.js",
+  "./data/units/u20.js"
 ];
 
 export default unitFiles;

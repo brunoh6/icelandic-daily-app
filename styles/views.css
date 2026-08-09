@@ -644,6 +644,67 @@
   background: var(--surface-2);
 }
 
+/* ---------------------------------------------------------- readers */
+.novel-teaser {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  border-color: color-mix(in oklab, var(--case-gen) 40%, var(--line));
+}
+.novel-teaser__icon {
+  font-size: 1.5rem;
+}
+.novel-teaser__t {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-md);
+}
+.novel-card {
+  display: grid;
+  gap: var(--sp-2);
+}
+.chapter-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.chapter-row__n {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--surface-3);
+  font-weight: 900;
+  font-size: var(--fs-sm);
+}
+.chapter-row.is-done .chapter-row__n {
+  background: var(--success);
+  color: var(--success-ink);
+}
+.chapter-row__t {
+  display: block;
+  font-weight: 750;
+}
+/* Chapter lines read as prose, so the speaker sits inline with the text
+   rather than being pushed onto a line of its own by a flex row. */
+.rline--plain {
+  cursor: default;
+  display: block;
+}
+.rline--plain .speak-btn {
+  width: 26px;
+  height: 26px;
+  vertical-align: -0.4em;
+  margin-left: 0.15rem;
+}
+.rline--plain .speak-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
 /* ---------------------------------------------------------- me */
 .goal-grid {
   display: grid;

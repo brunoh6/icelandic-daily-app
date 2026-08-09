@@ -28,6 +28,7 @@ import * as Drill from "./views/drill.js";
 import * as Words from "./views/words.js";
 import * as Grammar from "./views/grammar.js";
 import * as Read from "./views/read.js";
+import * as Novels from "./views/novels.js";
 import * as Me from "./views/me.js";
 
 const screen = $("#screen");
@@ -153,6 +154,11 @@ router.register("learn/:slug", async ({ slug }) =>
 );
 router.register("read", async () => show(Read.renderRead(), { tab: "learn", path: "read" }));
 router.register("read/:id", async ({ id }) => show(Read.renderReading(id), { tab: "learn", path: `read/${id}` }));
+router.register("novels", async () => show(Novels.renderNovels(), { tab: "learn", path: "novels" }));
+router.register("novel/:id", async ({ id }) => show(Novels.renderNovel(id), { tab: "learn", path: `novel/${id}` }));
+router.register("novel/:id/:n", async ({ id, n }) =>
+  show(Novels.renderChapter(id, n), { tab: "learn", path: `novel/${id}/${n}` })
+);
 
 router.register("drill", async () => show(Drill.renderDrill(drillCat), { tab: "drill", path: "drill" }));
 router.register("drill/:id", async ({ id }) =>
@@ -293,6 +299,27 @@ function playDrillMarathon(id) {
   });
 }
 
+function playChapterQuiz(id, n) {
+  const novel = index.novelById.get(id);
+  const chapter = novel?.chapters.find((c) => c.n === n);
+  if (!chapter) return;
+  const items = Novels.chapterExercises(novel, chapter);
+  if (!items.length) return toast("No questions for this chapter.", "");
+  play({
+    title: `${novel.title} · ${chapter.title}`,
+    kind: "review",
+    items,
+    onFinish(summary) {
+      Novels.markChapter(id, n);
+      addXP(summary.xp);
+      save();
+      toast(`+${summary.xp} XP`, "good");
+      refresh();
+    },
+    onQuit: refresh
+  });
+}
+
 function playReadingQuiz(id) {
   const reading = index.readingById.get(id);
   if (!reading) return;
@@ -424,6 +451,19 @@ function wireActions() {
       return refresh();
     }
     if (act === "read-quiz") return playReadingQuiz(el.dataset.id);
+    if (act === "novels") return router.go("novels");
+    if (act === "novel") return router.go(`novel/${el.dataset.id}`);
+    if (act === "chapter") return router.go(`novel/${el.dataset.id}/${el.dataset.n}`);
+    if (act === "chapter-quiz") return playChapterQuiz(el.dataset.id, Number(el.dataset.n));
+    if (act === "toggle-translation") {
+      const block = $("#translationBlock");
+      if (!block) return;
+      const shown = block.hasAttribute("hidden");
+      block.toggleAttribute("hidden", !shown);
+      el.textContent = shown ? "Hide translation" : "Show translation";
+      if (shown) block.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      return;
+    }
     if (act === "rline") {
       el.classList.toggle("is-open");
       return;
