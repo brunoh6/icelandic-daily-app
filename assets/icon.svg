@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Lundi">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16202b"/>
+      <stop offset="1" stop-color="#080c11"/>
+    </linearGradient>
+    <linearGradient id="beak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb02e"/>
+      <stop offset="0.5" stop-color="#ff8a2b"/>
+      <stop offset="1" stop-color="#f4542b"/>
+    </linearGradient>
+    <linearGradient id="aurora" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34dba6" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#8a6dfb" stop-opacity=".35"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="114" fill="url(#bg)"/>
+  <path d="M0 0h512v220C400 150 300 210 190 170 120 145 60 155 0 190Z" fill="url(#aurora)"/>
+
+  <!-- puffin -->
+  <g transform="translate(256 292) scale(2.15) translate(-60 -62)">
+    <path fill="#ff8a2b" d="M40 106c-6 3-9 6-8 8 1 2 6 2 12 1 4-1 7-3 7-5z"/>
+    <path fill="#ff8a2b" d="M76 106c6 3 9 6 8 8-1 2-6 2-12 1-4-1-7-3-7-5z"/>
+    <path fill="#202934" d="M60 8c25 0 40 18 40 42v22c0 22-16 38-40 38S20 94 20 72V50C20 26 35 8 60 8Z"/>
+    <path fill="#f4f8fc" d="M60 44c19 0 30 12 30 30 0 21-13 34-30 34S30 95 30 74c0-18 11-30 30-30Z"/>
+    <ellipse cx="60" cy="46" rx="27" ry="24" fill="#f4f8fc"/>
+    <ellipse cx="49" cy="44" rx="4.6" ry="5.2" fill="#141b24"/>
+    <ellipse cx="71" cy="44" rx="4.6" ry="5.2" fill="#141b24"/>
+    <circle cx="50.6" cy="42" r="1.6" fill="#fff"/>
+    <circle cx="72.6" cy="42" r="1.6" fill="#fff"/>
+    <path d="M44 36h10l-5 3z" fill="#e8503a"/>
+    <path d="M66 36h10l-5 3z" fill="#e8503a"/>
+    <path fill="url(#beak)" d="M60 54c11 0 19 5 19 11s-8 12-19 12-19-6-19-12 8-11 19-11Z"/>
+    <path fill="#9fb4c8" opacity=".85" d="M60 54c-6.5 0-12 1.7-15.5 4.4C46 62 52.4 64 60 64s14-2 15.5-5.6C72 55.7 66.5 54 60 54Z"/>
+  </g>
+</svg>

@@ -1,63 +1,106 @@
-# Icelandic Daily
+# Lundi — Icelandic every day
 
-A small offline-friendly Icelandic study app for 15-20 minute daily classes. It is built as a plain Progressive Web App, so it runs on a MacBook in a browser and can be opened or installed on an iPhone from Safari.
+A self-contained Icelandic course that lives on your phone. Built to be opened for ten minutes a
+day for a year and to take you from **A0+ to a solid A2 / early B1**.
 
-## Run on MacBook
+Named after *lundi*, the Atlantic puffin. Lúlli, the puffin in question, keeps score.
+
+**Live:** https://brunoh6.github.io/icelandic-daily-app/
+
+---
+
+## What's in it
+
+**Learn** — a winding path of units, each with lessons, a heavier grammar lesson, an original story,
+and a checkpoint. Nine exercise types: choose, write, build-from-tiles, listen, match, fill the
+right form, complete a paradigm table, assign gender, and say it out loud.
+
+**Drill** — the grammar gym. Every set repeats **one instruction across five rounds of six items**:
+round 1 masculine and cued, round 5 the same operation inside full sentences with no scaffolding.
+That deliberate repetition is the whole point — it is how declension tables actually become automatic.
+
+**Words** — every word with its gender, its full declension or conjugation, and a sentence that shows
+it doing its job. Spaced repetition (SM-2) schedules what comes back and when.
+
+**Grammar** — the reference you reach for mid-sentence: the four cases, prepositions grouped by the
+case they govern (with the motion-vs-location contrast made visible), verbs grouped by the case their
+object takes, and written topics from the alphabet to the subjunctive.
+
+**Me** — streak, XP, a twelve-week heatmap, daily goal, speech settings, offline download, backup.
+
+### The case colour code
+
+Four cases, four colours, used identically everywhere in the app — tables, badges, example sentences,
+preposition cards. Once you have seen `ÞGF` in moss green fifty times, the dative starts to feel like
+a place rather than a rule.
+
+| | | | |
+|---|---|---|---|
+| **NF** nefnifall | nominative | subject | glacier blue |
+| **ÞF** þolfall | accusative | direct object, motion, duration | puffin orange |
+| **ÞGF** þágufall | dative | indirect object, location, instrument | moss green |
+| **EF** eignarfall | genitive | possession, measure | lupine violet |
+
+---
+
+## Running it
+
+No build step, no dependencies. It is plain ES modules served as static files.
 
 ```bash
-cd "/Users/brunopaolohuamanvela/Documents/Icelandic App"
-python3 -m http.server 5173 --bind 0.0.0.0
+node tools/serve.js 5173     # http://127.0.0.1:5173
 ```
 
-Then open:
-
-```text
-http://localhost:5173
-```
-
-## Open on iPhone
-
-Keep the MacBook server running and connect the iPhone to the same Wi-Fi network. On the MacBook, find the local IP address:
+After editing anything in `data/`:
 
 ```bash
-ipconfig getifaddr en0
+node tools/build.js          # merges authoring files into the modules the app loads
+node tools/validate.js       # structural + content checks; must print OK
 ```
 
-On the iPhone, open Safari and visit:
+`build.js` generates `data/vocab.js`, `data/manifest.js`, `data/grammar.js`, `data/drills.js` and
+`data/readings.js`. Do not edit those by hand — edit the unit files and `data/src/*` instead.
 
-```text
-http://YOUR_MAC_IP:5173
+---
+
+## Layout
+
+```
+index.html            app shell
+styles/               tokens · base · components · views · session
+js/
+  main.js             boot, routing, delegated actions, session launching
+  store.js            progress, streak, XP, settings (localStorage)
+  srs.js              spaced repetition
+  data.js             content loading + indexes (units load lazily)
+  audio.js            Icelandic TTS + synthesised feedback tones
+  puffin.js           Lúlli
+  engine/items.js     the nine exercise renderers
+  engine/session.js   the lesson player
+  views/              learn · drill · words · grammar · read · me
+data/
+  units/uNN.js        a unit: 6 lessons + the vocabulary it introduces
+  src/                grammar-*, drills-*, readings-* (merged by build.js)
+  prepositions.js  verbcases.js  phrases.js
+tools/                build.js · validate.js · serve.js
+sw.js                 offline: network-first shell, cache-first content
 ```
 
-For example:
+---
 
-```text
-http://192.168.1.25:5173
-```
+## Notes
 
-To install it like an app, tap Share, then Add to Home Screen.
+**Speech.** Lundi speaks Icelandic through the browser's own speech synthesis. iOS ships Icelandic
+voices but they are not installed by default — add one under *Settings › Accessibility › Spoken
+Content › Voices › Icelandic* and the app will pick it up. Without one it falls back gracefully and
+tells you so in Settings.
 
-## Deploy To GitHub Pages
+**Offline.** The shell and reference data are cached on first visit; unit content is cached as you
+reach it. "Download all units" in **Me** pulls the whole course down for a flight or the ring road.
 
-After creating an empty GitHub repository, connect it and push:
+**Your data.** Everything is stored locally in your browser. Nothing is uploaded anywhere. Export a
+JSON backup from **Me** before clearing site data.
 
-```bash
-git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
-git push -u origin main
-```
-
-In GitHub, open Settings, then Pages. Choose Deploy from a branch, select `main`, and use `/ (root)`.
-
-## What Is Included
-
-- 16 guided lesson stages based on the book's progression.
-- Daily theory, phonetic practice notes, and exercises.
-- Gradually harder grammar topics, from sounds and greetings to subjunctive review.
-- Progress tracking, streak count, mastery percentage, and class completion.
-- Review queue for older classes.
-- Reading section with original A0, A1, A2, and A2-B1 level texts.
-- Reading filters by level/topic, vocabulary hints, English sense checks, and comprehension questions.
-- Icelandic-English vocabulary search by word, translation, or topic.
-- Dark responsive interface with an Iceland-inspired nightscape.
-
-The lesson text and exercises are original study material derived from the course structure and topics, not a reproduction of the book.
+**Sources.** The curriculum *sequencing* follows the classic beginner progression used by
+*Colloquial Icelandic* (Neijmann, Routledge), and grammatical paradigms are facts about the language.
+Every explanation, example sentence, dialogue, reading and exercise in this app was written for it.

@@ -1,0 +1,281 @@
+/* ============================================================
+   Lundi — design tokens
+   Palette is drawn from the island: basalt, glacier, moss, aurora,
+   and the orange-red of a puffin's beak.
+   ============================================================ */
+
+:root {
+  /* ---- brand ramps -------------------------------------------------- */
+  --beak-100: #fff1e8;
+  --beak-200: #ffd9c2;
+  --beak-300: #ffb491;
+  --beak-400: #ff8f5e;
+  --beak-500: #ff6b35; /* primary */
+  --beak-600: #ef4f18;
+  --beak-700: #c73c0f;
+
+  --moss-100: #e2fbf2;
+  --moss-200: #b6f4e0;
+  --moss-300: #78e9c6;
+  --moss-400: #34dba6;
+  --moss-500: #10c48c; /* success */
+  --moss-600: #06a074;
+  --moss-700: #077a5a;
+
+  --glacier-100: #e8f6ff;
+  --glacier-200: #c3e8ff;
+  --glacier-300: #8ed4ff;
+  --glacier-400: #4cbcff;
+  --glacier-500: #1c9df0;
+  --glacier-600: #087cc8;
+  --glacier-700: #0a5f97;
+
+  --lupine-300: #cbbcff;
+  --lupine-400: #a88fff;
+  --lupine-500: #8a6dfb;
+  --lupine-600: #6d4ee0;
+
+  --lava-300: #ffb3ac;
+  --lava-400: #ff8579;
+  --lava-500: #f4543f; /* error */
+  --lava-600: #d6371f;
+
+  --sun-400: #ffc94d;
+  --sun-500: #ffb020;
+
+  /* ---- case colour coding (used app-wide, never repurpose) ---------- */
+  --case-nom: var(--glacier-400);
+  --case-acc: var(--beak-400);
+  --case-dat: var(--moss-400);
+  --case-gen: var(--lupine-400);
+  --case-nom-soft: color-mix(in oklab, var(--case-nom) 18%, transparent);
+  --case-acc-soft: color-mix(in oklab, var(--case-acc) 18%, transparent);
+  --case-dat-soft: color-mix(in oklab, var(--case-dat) 18%, transparent);
+  --case-gen-soft: color-mix(in oklab, var(--case-gen) 18%, transparent);
+
+  /* ---- gender colour coding ---------------------------------------- */
+  --g-kk: var(--glacier-400);
+  --g-kvk: var(--beak-400);
+  --g-hk: var(--moss-400);
+
+  /* ---- type -------------------------------------------------------- */
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable",
+    "Segoe UI", Roboto, Inter, system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display",
+    "Segoe UI", Roboto, Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.9375rem;
+  --fs-lg: 1.0625rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: clamp(1.4rem, 1.1rem + 1.4vw, 1.75rem);
+  --fs-3xl: clamp(1.75rem, 1.3rem + 2.2vw, 2.4rem);
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.32;
+  --lh-body: 1.55;
+
+  /* ---- space ------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+
+  /* ---- shape ------------------------------------------------------- */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+  --r-2xl: 32px;
+  --r-pill: 999px;
+
+  /* ---- motion ------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast: 130ms;
+  --t-base: 220ms;
+  --t-slow: 380ms;
+
+  /* ---- layout ------------------------------------------------------ */
+  --shell-max: 34rem; /* comfortable phone/reading column */
+  --wide-max: 68rem;
+  --topbar-h: 3.25rem;
+  --tabbar-h: 3.75rem;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+
+  --z-tabbar: 40;
+  --z-topbar: 45;
+  --z-layer: 60;
+  --z-sheet: 70;
+  --z-toast: 90;
+}
+
+/* ---- dark (default) ------------------------------------------------ */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a0e13;
+  --bg-deep: #070a0e;
+  --surface: #121820;
+  --surface-2: #182029;
+  --surface-3: #1f2a35;
+  --surface-hi: #26323f;
+  --line: #26323f;
+  --line-soft: #1c2530;
+
+  --text: #eef3f8;
+  --text-2: #a9b8c6;
+  --text-3: #71818f;
+
+  --primary: var(--beak-500);
+  --primary-ink: #1a0b04;
+  --primary-soft: color-mix(in oklab, var(--beak-500) 16%, transparent);
+
+  --success: var(--moss-400);
+  --success-ink: #04231a;
+  --success-soft: color-mix(in oklab, var(--moss-400) 16%, transparent);
+
+  --danger: var(--lava-400);
+  --danger-ink: #2a0805;
+  --danger-soft: color-mix(in oklab, var(--lava-400) 16%, transparent);
+
+  --info: var(--glacier-400);
+  --info-soft: color-mix(in oklab, var(--glacier-400) 15%, transparent);
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 10px 30px -12px rgb(0 0 0 / 0.7);
+  --shadow-3: 0 24px 60px -20px rgb(0 0 0 / 0.8);
+  --btn-depth: 0 4px 0 0 color-mix(in oklab, var(--primary) 55%, #000);
+  --card-depth: 0 3px 0 0 var(--line);
+
+  --aurora-1: radial-gradient(80% 60% at 15% 0%, rgb(52 219 166 / 0.16), transparent 60%),
+    radial-gradient(70% 55% at 90% 8%, rgb(138 109 251 / 0.16), transparent 62%),
+    radial-gradient(90% 50% at 50% 100%, rgb(28 157 240 / 0.1), transparent 70%);
+}
+
+/* ---- light --------------------------------------------------------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f5f8fb;
+  --bg-deep: #eaeff5;
+  --surface: #ffffff;
+  --surface-2: #f2f6fa;
+  --surface-3: #e7eef5;
+  --surface-hi: #dde7f0;
+  --line: #dde5ee;
+  --line-soft: #eaf0f6;
+
+  --text: #0e1720;
+  --text-2: #536270;
+  --text-3: #8494a3;
+
+  --primary: var(--beak-600);
+  --primary-ink: #fff6f1;
+  --primary-soft: color-mix(in oklab, var(--beak-500) 14%, transparent);
+
+  --success: var(--moss-600);
+  --success-ink: #f2fffa;
+  --success-soft: color-mix(in oklab, var(--moss-500) 14%, transparent);
+
+  --danger: var(--lava-600);
+  --danger-ink: #fff5f3;
+  --danger-soft: color-mix(in oklab, var(--lava-500) 13%, transparent);
+
+  --info: var(--glacier-600);
+  --info-soft: color-mix(in oklab, var(--glacier-500) 13%, transparent);
+
+  --case-nom: var(--glacier-600);
+  --case-acc: var(--beak-600);
+  --case-dat: var(--moss-600);
+  --case-gen: var(--lupine-600);
+  --g-kk: var(--glacier-600);
+  --g-kvk: var(--beak-600);
+  --g-hk: var(--moss-600);
+
+  --shadow-1: 0 1px 2px rgb(16 34 52 / 0.06);
+  --shadow-2: 0 12px 28px -14px rgb(16 34 52 / 0.24);
+  --shadow-3: 0 24px 56px -22px rgb(16 34 52 / 0.3);
+  --btn-depth: 0 4px 0 0 color-mix(in oklab, var(--primary) 62%, #6a2a10);
+  --card-depth: 0 3px 0 0 var(--line);
+
+  --aurora-1: radial-gradient(80% 60% at 15% 0%, rgb(16 196 140 / 0.13), transparent 60%),
+    radial-gradient(70% 55% at 90% 8%, rgb(138 109 251 / 0.12), transparent 62%),
+    radial-gradient(90% 50% at 50% 100%, rgb(28 157 240 / 0.09), transparent 70%);
+}
+
+/* Follow the system when the user has not chosen. */
+@media (prefers-color-scheme: light) {
+  :root[data-theme="auto"] {
+    color-scheme: light;
+
+    --bg: #f5f8fb;
+    --bg-deep: #eaeff5;
+    --surface: #ffffff;
+    --surface-2: #f2f6fa;
+    --surface-3: #e7eef5;
+    --surface-hi: #dde7f0;
+    --line: #dde5ee;
+    --line-soft: #eaf0f6;
+
+    --text: #0e1720;
+    --text-2: #536270;
+    --text-3: #8494a3;
+
+    --primary: var(--beak-600);
+    --primary-ink: #fff6f1;
+    --primary-soft: color-mix(in oklab, var(--beak-500) 14%, transparent);
+    --success: var(--moss-600);
+    --success-ink: #f2fffa;
+    --success-soft: color-mix(in oklab, var(--moss-500) 14%, transparent);
+    --danger: var(--lava-600);
+    --danger-ink: #fff5f3;
+    --danger-soft: color-mix(in oklab, var(--lava-500) 13%, transparent);
+    --info: var(--glacier-600);
+    --info-soft: color-mix(in oklab, var(--glacier-500) 13%, transparent);
+
+    --case-nom: var(--glacier-600);
+    --case-acc: var(--beak-600);
+    --case-dat: var(--moss-600);
+    --case-gen: var(--lupine-600);
+    --g-kk: var(--glacier-600);
+    --g-kvk: var(--beak-600);
+    --g-hk: var(--moss-600);
+
+    --shadow-1: 0 1px 2px rgb(16 34 52 / 0.06);
+    --shadow-2: 0 12px 28px -14px rgb(16 34 52 / 0.24);
+    --shadow-3: 0 24px 56px -22px rgb(16 34 52 / 0.3);
+    --btn-depth: 0 4px 0 0 color-mix(in oklab, var(--primary) 62%, #6a2a10);
+
+    --aurora-1: radial-gradient(80% 60% at 15% 0%, rgb(16 196 140 / 0.13), transparent 60%),
+      radial-gradient(70% 55% at 90% 8%, rgb(138 109 251 / 0.12), transparent 62%),
+      radial-gradient(90% 50% at 50% 100%, rgb(28 157 240 / 0.09), transparent 70%);
+  }
+}
+
+/* Browsers without color-mix still need something readable. */
+@supports not (color: color-mix(in oklab, red 10%, transparent)) {
+  :root {
+    --primary-soft: rgb(255 107 53 / 0.16);
+    --success-soft: rgb(52 219 166 / 0.16);
+    --danger-soft: rgb(255 133 121 / 0.16);
+    --info-soft: rgb(76 188 255 / 0.15);
+    --case-nom-soft: rgb(76 188 255 / 0.18);
+    --case-acc-soft: rgb(255 143 94 / 0.18);
+    --case-dat-soft: rgb(52 219 166 / 0.18);
+    --case-gen-soft: rgb(168 143 255 / 0.18);
+    --btn-depth: 0 4px 0 0 rgb(150 55 20);
+  }
+}

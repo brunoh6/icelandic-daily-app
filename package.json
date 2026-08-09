@@ -1,10 +1,13 @@
 {
-  "name": "icelandic-daily-classes",
-  "version": "1.0.0",
+  "name": "lundi-icelandic",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
+  "description": "Lundi — an Icelandic course you can carry: A0 to B1 path, grammar gym, declensions, SRS.",
   "scripts": {
-    "start": "python3 -m http.server 5173 --bind 0.0.0.0",
-    "start:local": "python3 -m http.server 5173 --bind 127.0.0.1"
+    "build": "node tools/build.js",
+    "check": "node tools/build.js && node tools/validate.js",
+    "start": "python3 -m http.server 5173 --bind 127.0.0.1",
+    "serve": "python3 -m http.server 5173 --bind 0.0.0.0"
   }
 }
