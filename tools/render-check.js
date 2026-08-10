@@ -143,6 +143,60 @@ async function main() {
   check("words (no matches)", Words.renderWords());
   Words.wordFilters.q = "";
 
+  let extra = 3;
+
+  /* ---- branches that only fire once there is progress ----
+     Crowns, done-nodes, streaks and cleared drill rounds are invisible to a
+     fresh state, so seed one and render again. */
+  const { state, save } = await mod("js/store.js");
+  const seeded = [];
+  for (const u of content.manifest) {
+    for (const l of u.lessons) {
+      state.lessons[l.id] = { completed: 2, best: 1, lastAt: Date.now(), crown: 3 };
+      seeded.push(l.id);
+    }
+  }
+  for (const d of content.drills) {
+    state.drills[d.id] = { round: 5, cleared: 1, best: { 1: 6, 2: 6, 3: 6, 4: 6, 5: 6 }, lastAt: Date.now() };
+  }
+  for (const v of content.vocab.slice(0, 50)) {
+    state.srs[`w:${v.w}`] = { key: `w:${v.w}`, ef: 2.5, ivl: 30, due: "2000-01-01", reps: 6, lapses: 0, seen: 6, lastAt: 1 };
+  }
+  for (const n of content.novels) {
+    state.novels[n.id] = Object.fromEntries(n.chapters.map((c) => [c.n, true]));
+  }
+  state.xp = 5000;
+  state.streak = { count: 30, best: 30, lastDay: "2000-01-01", freezes: 1 };
+  save({ quiet: true });
+
+  check("learn (course complete)", Learn.renderLearn());
+  check("drill (all cleared)", Drill.renderDrill("all"));
+  check("words (with progress)", Words.renderWords());
+  check("me (with progress)", Me.renderMe());
+  check("novels (all read)", Novels.renderNovels());
+  for (const n of content.novels) check(`novel/${n.id} (read)`, Novels.renderNovel(n.id));
+  for (const u of content.manifest.slice(0, 3)) check(`learn/${u.slug} (done)`, await Learn.renderUnit(u.slug));
+  extra += 5 + content.novels.length + 3;
+
+  /* ---- the "no content at all" branches ---- */
+  const backup = {};
+  for (const key of ["manifest", "vocab", "grammar", "drills", "prepositions", "verbCases", "phrases", "readings", "novels"]) {
+    backup[key] = content[key];
+    content[key] = [];
+  }
+  check("learn (no content)", Learn.renderLearn());
+  check("drill (no content)", Drill.renderDrill("all"));
+  check("words (no content)", Words.renderWords());
+  check("phrases (no content)", Words.renderPhrases());
+  check("grammar (no content)", Grammar.renderGrammar());
+  check("grammar/preps (no content)", Grammar.renderPreps());
+  check("grammar/verbs (no content)", Grammar.renderVerbs());
+  check("read (no content)", Read.renderRead());
+  check("novels (no content)", Novels.renderNovels());
+  check("me (no content)", Me.renderMe());
+  extra += 10;
+  Object.assign(content, backup);
+
   /* ---- report ---- */
   const surfaces =
     11 +
@@ -152,9 +206,9 @@ async function main() {
     content.readings.length +
     content.novels.reduce((a, n) => a + n.chapters.length + 1, 0) +
     content.vocab.length +
-    3;
+    extra;
 
-  console.log(`rendered ${surfaces} surfaces`);
+  console.log(`rendered ${surfaces} surfaces (fresh, with progress, and with no content)`);
   if (problems.length) {
     console.log(`\n${problems.length} surface(s) leaked escaped markup:\n`);
     for (const p of problems.slice(0, 20)) {
