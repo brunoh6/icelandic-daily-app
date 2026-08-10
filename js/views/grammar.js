@@ -117,7 +117,11 @@ export function renderGrammar() {
           })
           .join("")
       )}
-      ${topicCount ? "" : `<div class="empty">${puffinSVG({ mood: "think", size: 100 })}<p>Grammar topics have not been generated yet.</p></div>`}
+      ${topicCount
+        ? ""
+        : raw(
+            `<div class="empty">${puffinSVG({ mood: "think", size: 100 })}<p>Grammar topics have not been generated yet.</p></div>`
+          )}
     </section>
   `;
 }
@@ -254,7 +258,7 @@ export function renderPreps() {
 
     <section class="stack">
       ${raw(list.map(prepCard).join(""))}
-      ${list.length ? "" : `<div class="empty"><p>Nothing matches that.</p></div>`}
+      ${list.length ? "" : raw(`<div class="empty"><p>Nothing matches that.</p></div>`)}
     </section>
   `;
 }
@@ -348,7 +352,7 @@ export function renderVerbs() {
 
     <section class="stack">
       ${raw(list.map(verbCard).join(""))}
-      ${list.length ? "" : `<div class="empty"><p>Nothing matches that.</p></div>`}
+      ${list.length ? "" : raw(`<div class="empty"><p>Nothing matches that.</p></div>`)}
     </section>
   `;
 }

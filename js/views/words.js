@@ -88,7 +88,9 @@ export function renderWords() {
     <section class="word-grid">
       ${raw(list.slice(0, 300).map(wordCard).join(""))}
     </section>
-    ${list.length > 300 ? `<p class="center tiny dim">Showing the first 300. Narrow the search to see more.</p>` : ""}
+    ${list.length > 300
+      ? html`<p class="center tiny dim">Showing the first 300. Narrow the search to see more.</p>`
+      : ""}
   `;
 }
 

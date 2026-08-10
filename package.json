@@ -6,8 +6,8 @@
   "description": "Lundi — an Icelandic course you can carry: A0 to B1 path, grammar gym, declensions, SRS.",
   "scripts": {
     "build": "node tools/build.js",
-    "check": "node tools/build.js && node tools/validate.js",
-    "start": "python3 -m http.server 5173 --bind 127.0.0.1",
-    "serve": "python3 -m http.server 5173 --bind 0.0.0.0"
+    "check": "node tools/build.js && node tools/validate.js && node tools/render-check.js && node tools/scan.js",
+    "start": "node tools/serve.js 5173",
+    "serve": "node tools/serve.js 5173"
   }
 }

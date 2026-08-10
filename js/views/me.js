@@ -91,7 +91,7 @@ export function renderMe() {
           data-act="set-rate" aria-label="Speech speed" />
         <span class="field__v num">${Number(state.profile.rate).toFixed(2)}×</span>
       </label>
-      ${voicePicker()}
+      ${raw(voicePicker())}
     </section>
 
     <section class="card stack">
