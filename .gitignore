@@ -1,2 +1,14 @@
 .DS_Store
 data/pending/
+
+# TTS build environment — never commit these.
+# .venv-tts is 169 MB of Python deps, tts-models is 320 MB of ONNX voices.
+# Both are rebuilt by tools/tts/setup.sh in about two minutes.
+.venv-tts/
+tts-models/
+
+# Build artefacts
+.cache/
+
+# The voice-comparison page was a one-off decision aid (Steinn won).
+tts-samples/

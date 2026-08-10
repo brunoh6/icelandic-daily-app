@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""
+Batch-synthesise the Icelandic audio pack with Piper, encode to ADTS AAC.
+
+The plan (which strings, under which filenames) comes from
+`node tools/audio-inventory.js --plan`. This script never hashes anything —
+js/audio-hash.js is the single source of truth for names.
+
+    node tools/audio-inventory.js --plan .cache/plan.json
+    .venv-tts/bin/python tools/tts/synthesize.py
+
+Re-runs are incremental: a clip already on disk is skipped, so adding a unit
+only synthesises the new strings.
+
+Options:
+    --voice steinn      which Talrómur voice (default steinn)
+    --bitrate 48000     AAC bitrate (default 48000)
+    --plan PATH         plan file (default .cache/plan.json)
+    --force             re-synthesise even if the file exists
+    --limit N           only do the first N (for a pilot run)
+"""
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+import wave
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+AUDIO = ROOT / "audio" / "is"
+MODELS = ROOT / "tts-models"
+
+
+def die(msg):
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(1)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--voice", default="steinn")
+    ap.add_argument("--bitrate", type=int, default=48000)
+    ap.add_argument("--plan", default=str(ROOT / ".cache" / "plan.json"))
+    ap.add_argument("--force", action="store_true")
+    ap.add_argument("--limit", type=int, default=0)
+    args = ap.parse_args()
+
+    if not shutil.which("afconvert"):
+        die("afconvert not found — this script needs macOS for AAC encoding")
+
+    model = MODELS / f"is_IS-{args.voice}-medium.onnx"
+    if not model.exists():
+        die(f"{model} missing — run tools/tts/setup.sh first")
+
+    plan_path = Path(args.plan)
+    if not plan_path.exists():
+        die(f"{plan_path} missing — run: node tools/audio-inventory.js --plan {plan_path}")
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    if args.limit:
+        plan = plan[: args.limit]
+
+    try:
+        from piper import PiperVoice
+    except ImportError:
+        die("piper is not installed — run tools/tts/setup.sh and use .venv-tts/bin/python")
+
+    todo = [c for c in plan if args.force or not (AUDIO / c["h"][:2] / f"{c['h']}.aac").exists()]
+    print(f"voice {args.voice} · {args.bitrate // 1000} kbps ADTS AAC")
+    print(f"{len(plan)} clips in plan, {len(plan) - len(todo)} already on disk, {len(todo)} to make")
+    if not todo:
+        write_manifest(plan, args)
+        return
+
+    print("loading model…", end=" ", flush=True)
+    t0 = time.time()
+    voice = PiperVoice.load(str(model))
+    print(f"{time.time() - t0:.1f}s")
+
+    tmp = Path(tempfile.mkdtemp(prefix="lundi-tts-"))
+    audio_s = 0.0
+    made = 0
+    failed = []
+    started = time.time()
+
+    for i, clip in enumerate(todo, 1):
+        h, text = clip["h"], clip["t"]
+        out = AUDIO / h[:2] / f"{h}.aac"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        wav = tmp / f"{h}.wav"
+        try:
+            with wave.open(str(wav), "wb") as wf:
+                voice.synthesize_wav(text, wf)
+            with wave.open(str(wav)) as wf:
+                audio_s += wf.getnframes() / wf.getframerate()
+            r = subprocess.run(
+                ["afconvert", "-f", "adts", "-d", "aac",
+                 "-b", str(args.bitrate), "-s", "2", str(wav), str(out)],
+                capture_output=True,
+            )
+            if r.returncode != 0:
+                failed.append((text, r.stderr.decode()[:120]))
+            else:
+                made += 1
+        except Exception as exc:                      # noqa: BLE001
+            failed.append((text, repr(exc)[:120]))
+        finally:
+            wav.unlink(missing_ok=True)
+
+        if i % 250 == 0 or i == len(todo):
+            el = time.time() - started
+            rate = i / el
+            eta = (len(todo) - i) / rate if rate else 0
+            print(f"  {i:>5}/{len(todo)}  {rate:5.1f} clips/s  eta {eta / 60:4.1f} min")
+
+    shutil.rmtree(tmp, ignore_errors=True)
+    elapsed = time.time() - started
+
+    total_bytes = sum(f.stat().st_size for f in AUDIO.rglob("*.aac"))
+    on_disk = sum(1 for _ in AUDIO.rglob("*.aac"))
+    print()
+    print(f"made {made} clips in {elapsed / 60:.1f} min "
+          f"({audio_s / elapsed:.0f}x realtime, {audio_s / 60:.0f} min of speech)")
+    print(f"pack: {on_disk} files, {total_bytes / 1024 / 1024:.1f} MB")
+    if failed:
+        print(f"\n{len(failed)} FAILED:")
+        for text, err in failed[:10]:
+            print(f"  {text[:50]!r}: {err}")
+
+    write_manifest(plan, args)
+
+
+def write_manifest(plan, args):
+    """Emit the list of hashes the app can rely on actually existing."""
+    present = [c["h"] for c in plan if (AUDIO / c["h"][:2] / f"{c['h']}.aac").exists()]
+    total_bytes = sum(f.stat().st_size for f in AUDIO.rglob("*.aac"))
+    out = ROOT / "data" / "audio-manifest.js"
+    body = (
+        "// GENERATED by tools/tts/synthesize.py — do not edit by hand.\n"
+        f"// {len(present)} clips, {total_bytes / 1024 / 1024:.1f} MB, "
+        f"voice is_IS-{args.voice}-medium, {args.bitrate // 1000} kbps ADTS AAC.\n"
+        "// One 16-character hash per clip, concatenated; the app slices it back apart.\n\n"
+        f'export const voice = "is_IS-{args.voice}-medium";\n'
+        f"export const clipCount = {len(present)};\n"
+        f"export const packBytes = {total_bytes};\n"
+        f'export const hashes =\n  "{"".join(sorted(present))}";\n\n'
+        "export default hashes;\n"
+    )
+    out.write_text(body, encoding="utf-8")
+    print(f"wrote data/audio-manifest.js ({len(present)} clips, {out.stat().st_size / 1024:.0f} KB)")
+
+
+if __name__ == "__main__":
+    main()

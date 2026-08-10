@@ -23,6 +23,7 @@ const PRECACHE = [
   "./js/srs.js",
   "./js/audio.js",
   "./js/puffin.js",
+  "./js/audio-hash.js",
   "./js/data.js",
   "./js/router.js",
   "./js/engine/items.js",
@@ -43,7 +44,8 @@ const PRECACHE = [
   "./data/verbcases.js",
   "./data/phrases.js",
   "./data/readings.js",
-  "./data/novels.js"
+  "./data/novels.js",
+  "./data/audio-manifest.js"
 ];
 
 self.addEventListener("install", (event) => {
@@ -95,6 +97,20 @@ async function networkFirst(request, cacheName, timeoutMs = 3000) {
   }
 }
 
+/** For content whose URL already identifies its bytes. No revalidation. */
+async function cacheFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) cache.put(request, response.clone());
+    return response;
+  } catch {
+    return new Response("", { status: 504 });
+  }
+}
+
 /** Serve instantly from cache, then quietly refresh it for next time. */
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
@@ -133,6 +149,13 @@ self.addEventListener("fetch", (event) => {
 
   if (isShell) {
     event.respondWith(networkFirst(request, SHELL));
+    return;
+  }
+
+  // Voice clips are immutable — the filename is a hash of what is spoken, so a
+  // changed string is a different file. Cache first, never revalidate.
+  if (url.pathname.includes("/audio/") && url.pathname.endsWith(".aac")) {
+    event.respondWith(cacheFirst(request, RUNTIME));
     return;
   }
 

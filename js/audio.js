@@ -1,8 +1,105 @@
-/* Sound: Icelandic text-to-speech plus synthesised feedback tones.
-   No audio files ship with the app — every sound is generated at runtime,
-   which keeps the PWA tiny and works offline. */
+/* Sound.
+ *
+ * Icelandic speech comes from a pre-recorded pack: every string the course can
+ * say was synthesised ahead of time with Piper using a Talrómur voice, and
+ * ships as ADTS AAC under audio/is/. iOS has no Icelandic system voice at all,
+ * so the browser's own speechSynthesis is only a fallback for anything the
+ * pack does not cover.
+ *
+ * Feedback tones and the haptics stay generated at runtime — no asset needed.
+ */
 
 import { state } from "./store.js";
+import { audioHash, pathForHash } from "./audio-hash.js";
+
+/* ------------------------------------------------------- recorded clips */
+
+let clipSet = null; // Set of 16-char hashes, or null until loaded
+let packInfo = { voice: null, clipCount: 0, packBytes: 0 };
+
+/** Load the list of clips that actually exist, so we never request a 404. */
+export async function loadAudioPack() {
+  if (clipSet) return packInfo;
+  try {
+    const mod = await import("../data/audio-manifest.js");
+    const blob = mod.hashes || "";
+    const set = new Set();
+    for (let i = 0; i + 16 <= blob.length; i += 16) set.add(blob.slice(i, i + 16));
+    clipSet = set;
+    packInfo = { voice: mod.voice, clipCount: mod.clipCount ?? set.size, packBytes: mod.packBytes ?? 0 };
+  } catch {
+    clipSet = new Set();
+  }
+  return packInfo;
+}
+
+export const audioPack = () => packInfo;
+export const packIsReady = () => Boolean(clipSet && clipSet.size);
+
+/** The URL for a string, or null when the pack has no clip for it. */
+export function clipUrl(text) {
+  if (!clipSet || !text) return null;
+  const h = audioHash(text);
+  return clipSet.has(h) ? pathForHash(h) : null;
+}
+
+export function hasClip(text) {
+  return Boolean(clipUrl(text));
+}
+
+/* One element, reused. iOS unlocks audio per element on a user gesture, so a
+   fresh Audio() per utterance would need a fresh gesture every time. */
+let player = null;
+function getPlayer() {
+  if (!player) {
+    player = new Audio();
+    player.preload = "auto";
+  }
+  return player;
+}
+
+function playClip(url, { rate, onstart, onend } = {}) {
+  return new Promise((resolve) => {
+    const el = getPlayer();
+    let settled = false;
+    const finish = (ok) => {
+      if (settled) return;
+      settled = true;
+      el.onended = el.onerror = el.onplaying = null;
+      onend?.();
+      resolve(ok);
+    };
+    try {
+      el.pause();
+      el.src = url;
+      // Safari keeps the pitch steady across playbackRate by default, which is
+      // what the "Slower" button wants.
+      el.playbackRate = Math.min(2, Math.max(0.5, rate ?? state.profile.rate ?? 1));
+      el.onplaying = () => onstart?.();
+      el.onended = () => finish(true);
+      el.onerror = () => finish(false);
+      const p = el.play();
+      if (p?.catch) p.catch(() => finish(false));
+    } catch {
+      finish(false);
+    }
+  });
+}
+
+/** Warm the HTTP/service-worker cache for clips a session is about to need. */
+export function prefetchClips(texts, limit = 24) {
+  if (!clipSet) return;
+  const seen = new Set();
+  let n = 0;
+  for (const t of texts) {
+    if (n >= limit) break;
+    const url = clipUrl(t);
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    n++;
+    fetch(url, { cache: "force-cache" }).catch(() => {});
+  }
+}
 
 /* ------------------------------------------------------------------ TTS */
 
@@ -66,9 +163,26 @@ function bestVoice() {
 
 let speaking = false;
 
-/** Speak Icelandic text. Resolves when it finishes (or immediately if muted). */
-export function speak(text, { rate, onstart, onend } = {}) {
-  if (!text || !state.profile.sound || !("speechSynthesis" in window)) {
+/**
+ * Say something in Icelandic. Recorded clip first, the browser's own voice
+ * second, silence third. Resolves when it finishes.
+ */
+export function speak(text, opts = {}) {
+  if (!text || !state.profile.sound) {
+    opts.onend?.();
+    return Promise.resolve(false);
+  }
+  stopSpeaking();
+  const url = clipUrl(text);
+  if (url) {
+    return playClip(url, opts).then((ok) => (ok ? true : speakSynth(text, opts)));
+  }
+  return speakSynth(text, opts);
+}
+
+/** The browser's own speech engine — on iOS there is no Icelandic voice. */
+function speakSynth(text, { rate, onstart, onend } = {}) {
+  if (!("speechSynthesis" in window)) {
     onend?.();
     return Promise.resolve(false);
   }
@@ -108,15 +222,35 @@ export function speak(text, { rate, onstart, onend } = {}) {
 export function stopSpeaking() {
   if ("speechSynthesis" in window) speechSynthesis.cancel();
   speaking = false;
+  if (player) {
+    player.onended = player.onerror = player.onplaying = null;
+    try {
+      player.pause();
+    } catch {
+      /* ignore */
+    }
+  }
 }
 
 let primed = false;
 
-/** iOS will not speak until it has seen a gesture — call this from the first tap.
-    Guarded, because doing it on every tap would queue silent utterances. */
+/** iOS will not play audio until it has seen a gesture — call this from the
+    first tap. Guarded, because doing it on every tap would queue silent
+    utterances. Unlocks BOTH the clip player and the speech engine. */
 export function primeSpeech() {
-  if (primed || !("speechSynthesis" in window)) return;
+  if (primed) return;
   primed = true;
+  // Unlock the shared <audio> element with a silent play/pause.
+  try {
+    const el = getPlayer();
+    el.muted = true;
+    const p = el.play();
+    if (p?.then) p.then(() => { el.pause(); el.muted = false; }).catch(() => { el.muted = false; });
+    else { el.pause(); el.muted = false; }
+  } catch {
+    /* ignore */
+  }
+  if (!("speechSynthesis" in window)) return;
   try {
     const u = new SpeechSynthesisUtterance(" ");
     u.volume = 0;

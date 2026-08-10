@@ -2,7 +2,7 @@
    grades them, re-queues mistakes once, and finishes on a results card. */
 
 import { esc, delegate, shuffle, clamp } from "../dom.js";
-import { speak, stopSpeaking, feedback, sfx, primeSpeech, primeAudio } from "../audio.js";
+import { speak, stopSpeaking, feedback, sfx, primeSpeech, primeAudio, prefetchClips } from "../audio.js";
 import { puffinSVG, setMood, lulliSays } from "../puffin.js";
 import { rendererFor, TYPE_LABEL } from "./items.js";
 import { teachBlocks, storyBlock } from "./teach.js";
@@ -196,8 +196,12 @@ export function startSession(host, config) {
     feedback(result.correct ? "correct" : "wrong");
     setMood(host, result.correct ? "cheer" : "sad");
     if (!result.correct && item.t !== "match") {
-      const say = item.speak || item.a || item.is;
-      if (typeof say === "string" && /[a-záðéíóúýþæö]/i.test(say)) setTimeout(() => speak(say), 260);
+      // Only replay the answer when the answer is Icelandic. A choice item's
+      // answer is often the English gloss ("dog"), and a gender item's is a
+      // grammar label ("kk") — reading those aloud in Icelandic is nonsense.
+      const answerIsIcelandic = ["type", "build", "fill", "listen"].includes(item.t);
+      const say = item.speak || (answerIsIcelandic ? item.a : null) || item.is;
+      if (typeof say === "string" && say.trim()) setTimeout(() => speak(say), 260);
     }
     host.querySelector("#continueBtn")?.focus({ preventScroll: true });
   }
@@ -501,6 +505,16 @@ export function startSession(host, config) {
   }
 
   session.matchMissed = false;
+
+  // Warm the clips this session will need, so nothing stalls mid-lesson.
+  prefetchClips(
+    [
+      ...items.flatMap((it) => [it.speak, it.word, it.is, it.a]),
+      ...(config.story?.lines || []).map((l) => l.is),
+      ...(config.teach || []).flatMap((t) => (t.ex || []).map((p) => p[0]))
+    ].filter((t) => typeof t === "string")
+  );
+
   const hasBrief = (Array.isArray(config.teach) && config.teach.length) || config.story;
   if (hasBrief) showBrief();
   else nextItem();

@@ -18,9 +18,10 @@ import {
   streakIsCold
 } from "./store.js";
 import * as router from "./router.js";
-import { speak, primeSpeech, primeAudio, sfx, haptic } from "./audio.js";
+import { speak, primeSpeech, primeAudio, sfx, haptic, loadAudioPack, audioPack } from "./audio.js";
 import { startSession, lessonQueue } from "./engine/session.js";
 import { seed } from "./srs.js";
+import { pathForHash } from "./audio-hash.js";
 import { puffinSVG } from "./puffin.js";
 
 import * as Learn from "./views/learn.js";
@@ -503,6 +504,34 @@ function wireActions() {
       toast("Progress reset.", "");
       return refresh();
     }
+    if (act === "download-audio") {
+      const pack = audioPack();
+      if (!pack.clipCount) return toast("The voice pack is not available.", "bad");
+      el.disabled = true;
+      const label = el.textContent;
+      const mod = await import("../data/audio-manifest.js");
+      const blob = mod.hashes || "";
+      const urls = [];
+      for (let i = 0; i + 16 <= blob.length; i += 16) urls.push(pathForHash(blob.slice(i, i + 16)));
+      let done = 0;
+      // Six at a time: enough to saturate wifi, not enough to stall the UI.
+      const workers = Array.from({ length: 6 }, async () => {
+        while (urls.length) {
+          const u = urls.pop();
+          await fetch(u, { cache: "force-cache" }).catch(() => {});
+          done += 1;
+          if (done % 50 === 0) el.textContent = `Downloading ${done}/${pack.clipCount}…`;
+        }
+      });
+      await Promise.all(workers);
+      el.textContent = "Voice pack saved ✓";
+      toast("Every clip is cached for offline use.", "good");
+      setTimeout(() => {
+        el.textContent = label;
+        el.disabled = false;
+      }, 4000);
+      return;
+    }
     if (act === "download-all") {
       el.disabled = true;
       const label = el.textContent;
@@ -620,6 +649,13 @@ async function main() {
     await loadCore();
   } catch (err) {
     console.error("Lundi: content failed to load", err);
+  }
+
+  // The recorded Icelandic clips. iOS ships no Icelandic voice, so this is the
+  // primary way the app speaks; speechSynthesis is only a fallback.
+  const pack = await loadAudioPack();
+  if (pack.clipCount) {
+    console.info(`Lundi: audio pack ready — ${pack.clipCount} clips, voice ${pack.voice}`);
   }
 
   // Restore the search filter state on a soft reload.

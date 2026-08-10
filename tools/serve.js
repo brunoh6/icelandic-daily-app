@@ -4,9 +4,13 @@
 import { createServer } from "node:http";
 import { createReadStream, statSync } from "node:fs";
 import { extname, join, normalize, resolve } from "node:path";
+import { networkInterfaces } from "node:os";
 
 const ROOT = resolve(process.cwd());
-const PORT = Number(process.argv[2] || process.env.PORT || 5173);
+const args = process.argv.slice(2);
+const PORT = Number(args.find((a) => /^\d+$/.test(a)) || process.env.PORT || 5173);
+// --lan binds every interface so a phone on the same wifi can reach it.
+const HOST = args.includes("--lan") ? "0.0.0.0" : "127.0.0.1";
 
 const TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -15,6 +19,10 @@ const TYPES = {
   ".css": "text/css; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
+  ".m4a": "audio/mp4",
+  ".aac": "audio/aac",
+  ".mp3": "audio/mpeg",
+  ".wav": "audio/wav",
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".jpg": "image/jpeg",
@@ -49,6 +57,12 @@ createServer((req, res) => {
     "service-worker-allowed": "/"
   });
   createReadStream(filePath).pipe(res);
-}).listen(PORT, "127.0.0.1", () => {
+}).listen(PORT, HOST, () => {
   console.log(`Lundi dev server: http://127.0.0.1:${PORT}/`);
+  if (HOST !== "0.0.0.0") return;
+  for (const [, addrs] of Object.entries(networkInterfaces())) {
+    for (const a of addrs || []) {
+      if (a.family === "IPv4" && !a.internal) console.log(`  on your network: http://${a.address}:${PORT}/`);
+    }
+  }
 });

@@ -4,7 +4,7 @@ import { esc, html, raw, dayKey, plural } from "../dom.js";
 import { content } from "../data.js";
 import { state, exportJSON, todayXP, studiedMinutes } from "../store.js";
 import { levelOf, dueCount } from "../srs.js";
-import { icelandicVoices } from "../audio.js";
+import { icelandicVoices, audioPack } from "../audio.js";
 import { puffinSVG } from "../puffin.js";
 import { courseProgress } from "./learn.js";
 
@@ -116,6 +116,7 @@ export function renderMe() {
         drive around the ring road.
       </p>
       <button class="btn btn--sm" data-act="download-all" id="dlBtn">Download all ${content.manifest.length} units</button>
+      <button class="btn btn--sm" data-act="download-audio" id="dlAudioBtn">Download the voice pack</button>
       <div class="row" style="gap:.5rem">
         <button class="btn btn--sm grow" data-act="export">Export backup</button>
         <button class="btn btn--sm grow" data-act="import">Import backup</button>
@@ -146,11 +147,25 @@ function toggle(key, label, on) {
 }
 
 function voicePicker() {
+  const pack = audioPack();
   const isVoices = icelandicVoices();
+
+  // The recorded pack is the normal path — iOS has no Icelandic system voice,
+  // which is the whole reason it exists.
+  if (pack.clipCount) {
+    const mb = pack.packBytes ? ` · ${(pack.packBytes / 1024 / 1024).toFixed(0)} MB` : "";
+    return `<p class="callout">
+      Icelandic is spoken by ${pack.clipCount.toLocaleString("en-US")} recorded clips
+      (voice <b>${esc(String(pack.voice || "").replace("is_IS-", "").replace("-medium", ""))}</b>${mb}),
+      so it sounds right even though iOS ships no Icelandic voice.
+      ${isVoices.length ? "Anything not in the pack falls back to your device voice." : ""}
+    </p>`;
+  }
+
   if (!isVoices.length) {
     return `<p class="callout">
-      No Icelandic voice is installed on this device, so speech will sound off.
-      On iPhone: Settings → Accessibility → Spoken Content → Voices → Icelandic.
+      No Icelandic voice is installed on this device and the recorded pack has not loaded,
+      so speech will sound off. On iPhone: Settings → Accessibility → Spoken Content → Voices → Icelandic.
     </p>`;
   }
   const options = isVoices
