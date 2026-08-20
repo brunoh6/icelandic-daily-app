@@ -24,6 +24,7 @@ const PRECACHE = [
   "./js/audio.js",
   "./js/puffin.js",
   "./js/audio-hash.js",
+  "./js/offline.js",
   "./js/data.js",
   "./js/router.js",
   "./js/engine/items.js",

@@ -76,6 +76,14 @@
   background: var(--surface-2);
 }
 
+/* A pack that is already on the device: still tappable to re-verify, but it
+   should read as done rather than as a call to action. */
+.btn--saved {
+  --btn-bg: var(--success-soft);
+  --btn-fg: var(--success);
+  --btn-line: color-mix(in oklab, var(--success) 40%, transparent);
+}
+
 .btn--block {
   width: 100%;
 }

@@ -61,6 +61,8 @@ function installDomStubs() {
   globalThis.CSS = { escape: (s) => String(s) };
   globalThis.requestAnimationFrame = (fn) => setTimeout(fn, 0);
   globalThis.navigator = { vibrate: noop, serviceWorker: undefined };
+  // renderMe asks the Cache API what is downloaded; nothing is, under Node.
+  delete globalThis.caches;
   // No speech engine in Node — voicePicker() must take its "no voice" branch,
   // which is exactly the branch that was rendering as raw text.
   delete globalThis.speechSynthesis;
@@ -117,7 +119,7 @@ async function main() {
   check("grammar/verbs", Grammar.renderVerbs());
   check("read", Read.renderRead());
   check("novels", Novels.renderNovels());
-  check("me", Me.renderMe());
+  check("me", await Me.renderMe());
 
   /* ---- every detail page, against every real record ---- */
   for (const u of content.manifest) check(`learn/${u.slug}`, await Learn.renderUnit(u.slug));
@@ -172,7 +174,7 @@ async function main() {
   check("learn (course complete)", Learn.renderLearn());
   check("drill (all cleared)", Drill.renderDrill("all"));
   check("words (with progress)", Words.renderWords());
-  check("me (with progress)", Me.renderMe());
+  check("me (with progress)", await Me.renderMe());
   check("novels (all read)", Novels.renderNovels());
   for (const n of content.novels) check(`novel/${n.id} (read)`, Novels.renderNovel(n.id));
   for (const u of content.manifest.slice(0, 3)) check(`learn/${u.slug} (done)`, await Learn.renderUnit(u.slug));
@@ -193,7 +195,7 @@ async function main() {
   check("grammar/verbs (no content)", Grammar.renderVerbs());
   check("read (no content)", Read.renderRead());
   check("novels (no content)", Novels.renderNovels());
-  check("me (no content)", Me.renderMe());
+  check("me (no content)", await Me.renderMe());
   extra += 10;
   Object.assign(content, backup);
 

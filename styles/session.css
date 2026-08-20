@@ -9,7 +9,12 @@ body.is-playing {
 .sess {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
+  /* dvh, not svh: svh is the height with the browser toolbars *expanded*, so
+     once they retract the player stops short and leaves a strip of page
+     showing under the footer. dvh tracks whatever is actually visible.
+     svh first as the fallback for engines without dvh. */
   height: 100svh;
+  height: 100dvh;
   max-width: var(--shell-max);
   margin-inline: auto;
 }
@@ -483,7 +488,10 @@ body.is-playing {
 
 /* ---------------------------------------------------------- footer */
 .sess-footer {
-  padding: var(--sp-3) max(var(--sp-4), var(--safe-r)) calc(var(--safe-b) + var(--sp-4))
+  /* max(), not safe-b + gutter: adding them stacked 50px of dead space under
+     the button on a device with a home indicator. max() clears the indicator
+     on iPhone and still leaves a sensible gutter everywhere else. */
+  padding: var(--sp-3) max(var(--sp-4), var(--safe-r)) max(var(--safe-b), var(--sp-3))
     max(var(--sp-4), var(--safe-l));
   border-top: 1px solid var(--line-soft);
   background: var(--surface);
@@ -678,7 +686,7 @@ body.is-playing {
     max(var(--sp-4), var(--safe-l));
 }
 .notes-panel__foot {
-  padding: var(--sp-3) max(var(--sp-4), var(--safe-r)) calc(var(--safe-b) + var(--sp-4))
+  padding: var(--sp-3) max(var(--sp-4), var(--safe-r)) max(var(--safe-b), var(--sp-3))
     max(var(--sp-4), var(--safe-l));
   border-top: 1px solid var(--line-soft);
   background: var(--surface);

@@ -175,7 +175,7 @@ router.register("grammar/preps", async () => show(Grammar.renderPreps(), { tab: 
 router.register("grammar/verbs", async () => show(Grammar.renderVerbs(), { tab: "grammar", path: "grammar/verbs" }));
 router.register("topic/:id", async ({ id }) => show(Grammar.renderTopic(id), { tab: "grammar", path: `topic/${id}` }));
 
-router.register("me", async () => show(Me.renderMe(), { tab: "me", path: "me" }));
+router.register("me", async () => show(await Me.renderMe(), { tab: "me", path: "me" }));
 
 let drillCat = "all";
 
@@ -508,7 +508,6 @@ function wireActions() {
       const pack = audioPack();
       if (!pack.clipCount) return toast("The voice pack is not available.", "bad");
       el.disabled = true;
-      const label = el.textContent;
       const mod = await import("../data/audio-manifest.js");
       const blob = mod.hashes || "";
       const urls = [];
@@ -524,27 +523,20 @@ function wireActions() {
         }
       });
       await Promise.all(workers);
-      el.textContent = "Voice pack saved ✓";
       toast("Every clip is cached for offline use.", "good");
-      setTimeout(() => {
-        el.textContent = label;
-        el.disabled = false;
-      }, 4000);
-      return;
+      el.disabled = false;
+      // Re-render from the cache rather than hand-writing a label, so the
+      // button still reads correctly when you come back to this tab later.
+      return refresh();
     }
     if (act === "download-all") {
       el.disabled = true;
-      const label = el.textContent;
       await loadAllUnits((done, total) => {
         el.textContent = `Downloading ${done}/${total}…`;
       });
-      el.textContent = "Available offline ✓";
       toast("All units cached for offline use.", "good");
-      setTimeout(() => {
-        el.textContent = label;
-        el.disabled = false;
-      }, 4000);
-      return;
+      el.disabled = false;
+      return refresh();
     }
   });
 

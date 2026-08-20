@@ -7,6 +7,7 @@ import { levelOf, dueCount } from "../srs.js";
 import { icelandicVoices, audioPack } from "../audio.js";
 import { puffinSVG } from "../puffin.js";
 import { courseProgress } from "./learn.js";
+import { offlineStatus } from "../offline.js";
 
 const GOALS = [
   { xp: 15, label: "Casual", sub: "≈ 5 min" },
@@ -15,7 +16,9 @@ const GOALS = [
   { xp: 80, label: "Intense", sub: "≈ 30 min" }
 ];
 
-export function renderMe() {
+export async function renderMe() {
+  // Ask the cache what is really on the device, so the buttons tell the truth.
+  const offline = await offlineStatus();
   const progress = courseProgress();
   const acc = state.stats.answered ? Math.round((state.stats.correct / state.stats.answered) * 100) : 0;
   const strongWords = content.vocab.filter((v) => levelOf(`w:${v.w}`) >= 4).length;
@@ -112,11 +115,28 @@ export function renderMe() {
     <section class="card stack">
       <h2 class="h3">Offline & data</h2>
       <p class="tiny dim">
-        Lundi works with no signal once the lessons are cached. Download them before a flight or a
-        drive around the ring road.
+        ${offline.units >= content.manifest.length && offline.clips >= audioPack().clipCount
+          ? "Everything is on this device. Lundi works with no signal at all."
+          : "Lundi works with no signal once the lessons are cached. Download them before a flight or a drive around the ring road."}
       </p>
-      <button class="btn btn--sm" data-act="download-all" id="dlBtn">Download all ${content.manifest.length} units</button>
-      <button class="btn btn--sm" data-act="download-audio" id="dlAudioBtn">Download the voice pack</button>
+      ${raw(downloadButton({
+        act: "download-all",
+        id: "dlBtn",
+        have: offline.units,
+        total: content.manifest.length,
+        idle: `Download all ${content.manifest.length} units`,
+        doneLabel: `All ${content.manifest.length} units saved`,
+        partial: (h, t) => `Finish downloading units · ${h}/${t}`
+      }))}
+      ${raw(downloadButton({
+        act: "download-audio",
+        id: "dlAudioBtn",
+        have: offline.clips,
+        total: audioPack().clipCount,
+        idle: `Download the voice pack${audioPack().packBytes ? ` · ${(audioPack().packBytes / 1024 / 1024).toFixed(0)} MB` : ""}`,
+        doneLabel: "Voice pack saved",
+        partial: (h, t) => `Finish downloading voice · ${h}/${t}`
+      }))}
       <div class="row" style="gap:.5rem">
         <button class="btn btn--sm grow" data-act="export">Export backup</button>
         <button class="btn btn--sm grow" data-act="import">Import backup</button>
@@ -136,6 +156,16 @@ export function renderMe() {
       <p class="tiny dim">Lúlli the puffin says: <span class="is">gangi þér vel!</span></p>
     </section>
   `;
+}
+
+/** A download button that knows whether its pack is already on the device. */
+function downloadButton({ act, id, have, total, idle, doneLabel, partial }) {
+  if (!total) return `<button class="btn btn--sm" disabled>${esc(idle)}</button>`;
+  const done = have >= total;
+  const started = have > 0 && !done;
+  const label = done ? `${doneLabel} ✓` : started ? partial(have, total) : idle;
+  return `<button class="btn btn--sm ${done ? "btn--saved" : ""}" data-act="${esc(act)}" id="${esc(id)}"
+    ${done ? 'data-done="1"' : ""}>${esc(label)}</button>`;
 }
 
 function toggle(key, label, on) {
